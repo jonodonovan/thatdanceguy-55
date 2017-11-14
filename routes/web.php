@@ -15,12 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('posts', 'PostController');
-Route::resource('tags', 'TagController');
-Route::resource('events', 'EventController');
-Route::resource('venues', 'VenueController');
-Route::resource('partners', 'PartnerController');
+Route::prefix('admin')->group(function () {
+    Route::group(['as' => 'admin.'], function () {
+    Route::resource('post', 'PostController');
+    Route::resource('tag', 'TagController');
+    Route::resource('event', 'EventController');
+    Route::resource('venue', 'VenueController');
+    Route::resource('partner', 'PartnerController');
+    });
+});
 
 Auth::routes();
 
-Route::get('admin', 'HomeController@index')->name('home');
+Route::get('admin', 'HomeController@index')->name('admin');

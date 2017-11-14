@@ -19,7 +19,7 @@ class PostController extends Controller
         $posts = Post::orderBy('title')->get();
         $tags = Tag::all()->unique('title');
 
-        return view('posts.index')->withPosts($posts)->withTags($tags);
+        return view('admin.post.index')->withPosts($posts)->withTags($tags);
     }
 
     /**
@@ -30,7 +30,7 @@ class PostController extends Controller
     public function create()
     {
         $alltags = Tag::orderBy('title')->get();
-        return view('posts.create')->withAlltags($alltags);
+        return view('post.create')->withAlltags($alltags);
     }
 
     /**
@@ -85,7 +85,7 @@ class PostController extends Controller
 
         Session::flash('success', 'New Post Created');
 
-        return redirect()->route('posts.create');
+        return redirect()->route('post.create');
     }
 
     /**
@@ -106,7 +106,7 @@ class PostController extends Controller
 
         $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
 
-        return view('posts.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+        return view('post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
     }
 
     /**
