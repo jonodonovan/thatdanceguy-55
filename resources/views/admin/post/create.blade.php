@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('style')
+    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+@endsection
+
+@section('script_header')
+    <script src="https://unpkg.com/flatpickr"></script>
+@endsection
+
 @section('content')
     <div class="container m-b-100">
         <h1 style="text-transform:uppercase;">Create a new post</h1>
@@ -81,4 +89,21 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('script_footer')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        flatpickr("#startdatetime", {
+            altInput: true,
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+        flatpickr("#enddatetime", {
+            altInput: true,
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+    </script>
 @endsection

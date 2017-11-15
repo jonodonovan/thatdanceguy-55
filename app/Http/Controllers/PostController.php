@@ -31,6 +31,7 @@ class PostController extends Controller
 
         return view('public.post.index')->withPosts($posts)->withTags($tags);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -173,9 +174,44 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $post = Post::where('slug', '=', $slug)->firstOrFail();
+
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'intro' => '',
+            'body' => '',
+            'image' => 'image|mimes:jpeg,bmp,png',
+        ));
+
+        $post->slug = $request->title;
+        $delimiter = '-';
+        $post->slug = iconv('UTF-8', 'ASCII//TRANSLIT', $post->slug);
+        $post->slug = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $post->slug);
+        $post->slug = preg_replace("/[\/_|+ -]+/", $delimiter, $post->slug);
+        $post->slug = strtolower(trim($post->slug, $delimiter));
+
+        $post->title = $request->title;
+        $post->intro = $request->intro;
+        $post->body = $request->body;
+        $post->image = $request->image;
+        $post->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
+        $post->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
+
+        $post->save();
+
+        if (isset($request->tagselect))
+        {
+            $post->tags()->sync($request->tagselect);
+        } else {
+            $post->tags()->sync(array());
+        }
+
+        Session::flash('success', 'Post Updated');
+
+        // redirect
+        return redirect()->route('admin.post.index');
     }
 
     /**

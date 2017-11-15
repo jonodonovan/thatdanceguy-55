@@ -38,6 +38,9 @@
                     <div class="caption">
                         <h3>{{$post->title}}</h3>
                         <p>{{$post->intro}}</p>
+                        @foreach ($post->tags as $tag)
+                            <a href="{{url('tags/'.$tag->slug)}}" class="badge badge-info">{{$tag->title}}</a>
+                        @endforeach
                         <p>
                             <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
                         </p>

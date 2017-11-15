@@ -9,6 +9,49 @@ use Session;
 class TagController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['public', 'publicshow']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function public()
+    {
+        $posts = Post::orderBy('title')->get();
+        $tags = Tag::all()->unique('title');
+
+        return view('public.post.index')->withPosts($posts)->withTags($tags);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publicshow($slug)
+    {
+        $post = Post::where('slug', '=', $slug)->firstOrFail();
+        $alltags = Tag::orderBy('title')->get();
+
+        $tags = $post->tags->modelKeys();
+        $similarthings = Post::whereHas('tags', function ($q) use ($tags) {
+            $q->whereIn('tags.id', $tags);
+        })->where('id', '<>', $post->id)->orderBy('id', 'asc')->get();
+
+        $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
+
+        return view('public.post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -18,7 +61,7 @@ class TagController extends Controller
 
         $tags = Tag::orderBy('title')->get();
 
-        return view('tags.index')->withTags($tags);
+        return view('admin.tag.index')->withTags($tags);
     }
 
     /**
@@ -28,7 +71,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -63,7 +106,7 @@ class TagController extends Controller
         Session::flash('success', 'New Tag Created');
 
         // redirect
-        return redirect()->route('tags.create');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
@@ -76,7 +119,7 @@ class TagController extends Controller
     {
         $tag = Tag::where('slug', '=', $slug)->firstOrFail();
 
-        return view('tags.show')->withTag($tag);
+        return view('admin.tag.show')->withTag($tag);
     }
 
     /**
@@ -89,7 +132,7 @@ class TagController extends Controller
     {
         $tag = Tag::where('slug', '=', $slug)->firstOrFail();
 
-        return view('tags.edit')->withTag($tag);
+        return view('admin.tag.edit')->withTag($tag);
     }
 
     /**
@@ -119,7 +162,7 @@ class TagController extends Controller
         Session::flash('success', 'Tag Updated');
 
         // redirect
-        return redirect()->route('tags.index');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
@@ -137,6 +180,6 @@ class TagController extends Controller
 
         Session::flash('success', 'Tag deleted');
 
-        return redirect()->route('tags.index');
+        return redirect()->route('admin.tag.index');
     }
 }

@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('partials.alerts')
     <div class="container m-b-100">
         <h1 style="text-transform:uppercase;">Editing {{$post->title}}</h1>
-        <form method="POST" action="{{route('admin.post.update', $post->slug)}}">
+        <form method="POST" action="{{route('admin.post.update', $post->slug)}}" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PATCH')}}
             <div class="row">
@@ -14,9 +15,17 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleSelect2">Tag</label>
+
                         <select multiple class="form-control" id="tagselect" name="tagselect[]">
                             @foreach ($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->title}}</option>
+
+                                    <option value="{{$tag->id}}"
+                                        @foreach ($post->tags as $ptag)
+                                            @if ($ptag->id == $tag->id) selected @endif
+                                        @endforeach
+
+                                    >{{$tag->title}}</option>
+
                             @endforeach
                         </select>
                     </div>
@@ -55,7 +64,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
-                    <button type="submit" class="btn btn-success">Create Post</button>
+                    <button type="submit" class="btn btn-success">Save Post</button>
                 </div>
             </div>
         </form>

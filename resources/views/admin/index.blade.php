@@ -14,6 +14,12 @@
                         </div>
                     @endif
 
+                    <h2>Tags</h2>
+                    <ul>
+                        <li><a href="{{route('admin.tag.index')}}">Index</a></li>
+                        <li><a href="{{route('admin.tag.create')}}">Create</a></li>
+                    </ul>
+
                     <h2>Posts</h2>
                     <ul>
                         <li><a href="{{route('admin.post.index')}}">Index</a></li>
@@ -33,11 +39,7 @@
                         <li><a href="{{route('admin.event.create')}}">Create</a></li>
                     </ul>
 
-                    <h2>Tags</h2>
-                    <ul>
-                        <li><a href="{{route('admin.tag.index')}}">Index</a></li>
-                        <li><a href="{{route('admin.tag.create')}}">Create</a></li>
-                    </ul>
+
 
                     <h2>Partners</h2>
                     <ul>
