@@ -14,14 +14,7 @@ class Event extends Model
     *
     * @var array
     */
-    protected $dates = ['deleted_at'];
-
-    /**
-    * The attributes that should be mutated to dates.
-    *
-    * @var array
-    */
-    protected $dates = ['startdatetime', 'enddatetime'];
+    protected $dates = ['deleted_at', 'startdatetime', 'enddatetime'];
 
     public function venue()
     {

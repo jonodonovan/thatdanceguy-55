@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-
+        <p><a href="{{route('admin.post.index')}}"><-Back</a></p>
         @if ($post->image)
             <img src="{{url('images/'.$post->image)}}" class="img-thumbnail" alt="Responsive image">
         @endif

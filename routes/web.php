@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@home')->name('home');
+
+Route::get('posts', 'PostController@public')->name('posts');
+Route::get('posts/{slug}', 'PostController@publicshow')->name('posts.show');
 
 Route::prefix('admin')->group(function () {
     Route::group(['as' => 'admin.'], function () {

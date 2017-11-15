@@ -10,6 +10,48 @@ use Session;
 class PostController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['public', 'publicshow']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function public()
+    {
+        $posts = Post::orderBy('title')->get();
+        $tags = Tag::all()->unique('title');
+
+        return view('public.post.index')->withPosts($posts)->withTags($tags);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publicshow($slug)
+    {
+        $post = Post::where('slug', '=', $slug)->firstOrFail();
+        $alltags = Tag::orderBy('title')->get();
+
+        $tags = $post->tags->modelKeys();
+        $similarthings = Post::whereHas('tags', function ($q) use ($tags) {
+            $q->whereIn('tags.id', $tags);
+        })->where('id', '<>', $post->id)->orderBy('id', 'asc')->get();
+
+        $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
+
+        return view('public.post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,8 +71,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $alltags = Tag::orderBy('title')->get();
-        return view('post.create')->withAlltags($alltags);
+        $tags = Tag::orderBy('title')->get();
+        return view('admin.post.create')->withTags($tags);
     }
 
     /**
@@ -85,7 +127,7 @@ class PostController extends Controller
 
         Session::flash('success', 'New Post Created');
 
-        return redirect()->route('post.create');
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -106,7 +148,7 @@ class PostController extends Controller
 
         $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
 
-        return view('post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+        return view('admin.post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
     }
 
     /**
@@ -115,9 +157,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post = Post::where('slug', '=', $slug)->firstOrFail();
+        $tags = Tag::all()->unique('title');
+
+        return view('admin.post.edit')->withPost($post)->withTags($tags);
+
     }
 
     /**
@@ -140,6 +186,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findorFail($id);
+        $post->delete();
+
+        Session::flash('success', 'Post Deleted');
+        return redirect()->route('admin.post.index');
     }
 }
