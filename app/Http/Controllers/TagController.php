@@ -144,11 +144,8 @@ class TagController extends Controller
      */
     public function update(Request $request, $slug)
     {
-
         $tag = Tag::where('slug', '=', $slug)->firstOrFail();
-        // $tag = Tag::firstOrFail($slug);
 
-        // validate data
         $this->validate($request, array(
             'title' => 'required|max:255',
             'description' => 'required'
@@ -161,7 +158,6 @@ class TagController extends Controller
 
         Session::flash('success', 'Tag Updated');
 
-        // redirect
         return redirect()->route('admin.tag.index');
     }
 

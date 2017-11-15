@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container m-b-100">
+    <div class="container">
         <h1 style="text-transform:uppercase;">Create a new Tag</h1>
         <form method="POST" action="{{route('admin.tag.store')}}">
             {{csrf_field()}}

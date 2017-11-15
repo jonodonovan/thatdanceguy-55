@@ -210,7 +210,6 @@ class PostController extends Controller
 
         Session::flash('success', 'Post Updated');
 
-        // redirect
         return redirect()->route('admin.post.index');
     }
 

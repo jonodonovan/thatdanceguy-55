@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="container m-b-100">
+    <div class="container">
         <h1 style="text-transform:uppercase;">Create a new post</h1>
         <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}

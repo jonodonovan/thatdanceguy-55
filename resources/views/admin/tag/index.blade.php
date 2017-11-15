@@ -9,9 +9,6 @@
                     <a href="{{route('admin')}}">Admin</a> - All Tags | <small><a href="{{route('admin.tag.create')}}">new</a></small>
                 </div>
                 <div class="panel-body">
-
-                    @include('partials.alerts')
-
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -60,7 +57,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete {{$tag->title}} tag?
+                    Are you sure you want to delete <b>{{$tag->title}}</b> tag?
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="{{route('admin.tag.destroy', $tag->id)}}">

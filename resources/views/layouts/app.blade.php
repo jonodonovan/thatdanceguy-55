@@ -21,6 +21,7 @@
 <body>
     <div id="app">
         @include('partials.nav_public')
+        @include('partials.alerts')
         @yield('content')
     </div>
 

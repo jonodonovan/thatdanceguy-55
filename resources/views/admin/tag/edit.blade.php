@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container m-b-100">
-        <h1 style="text-transform:uppercase;">Create a new Tag</h1>
+        <h1 style="text-transform:uppercase;">Editing {{$tag->title}}</h1>
         <form method="POST" action="{{ route('admin.tag.update', $tag->slug) }}">
             {{ method_field('PATCH')}}
             {{ csrf_field() }}

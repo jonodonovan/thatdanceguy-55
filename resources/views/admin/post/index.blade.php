@@ -9,9 +9,6 @@
                     <a href="{{route('admin')}}">Admin</a> - All Posts | <small><a href="{{route('admin.post.create')}}">new</a></small>
                 </div>
                 <div class="panel-body">
-
-                    @include('partials.alerts')
-
                     <table class="table table-hover">
                         <thead>
                             <tr>

@@ -9,6 +9,40 @@ use Session;
 class VenueController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['public', 'publicshow']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function public()
+    {
+        $venues = Venue::orderBy('name')->get();
+
+        return view('public.venue.index')->withVenues($venues);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publicshow($slug)
+    {
+        $venue = Venue::where('slug', '=', $slug)->firstOrFail();
+
+        return view('public.venue.show')->withVenue($venue);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,7 +51,7 @@ class VenueController extends Controller
     {
         $venues = Venue::orderBy('name')->get();
 
-        return view('venues.index')->withVenues($venues);
+        return view('admin.venue.index')->withVenues($venues);
     }
 
     /**
@@ -27,7 +61,7 @@ class VenueController extends Controller
      */
     public function create()
     {
-        return view('venues.create');
+        return view('admin.venue.create');
     }
 
     /**
@@ -64,7 +98,7 @@ class VenueController extends Controller
         Session::flash('success', 'New Venue Created');
 
         // redirect
-        return redirect()->route('venues.create');
+        return redirect()->route('admin.venue.index');
     }
 
     /**
@@ -77,7 +111,7 @@ class VenueController extends Controller
     {
         $venue = Venue::where('slug', '=', $slug)->firstOrFail();
 
-        return view('venues.show')->withVenue($venue);
+        return view('admin.venue.show')->withVenue($venue);
     }
 
     /**
@@ -86,9 +120,11 @@ class VenueController extends Controller
      * @param  \App\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function edit(Venue $venue)
+    public function edit($slug)
     {
-        //
+        $venue = Venue::where('slug', '=', $slug)->firstOrFail();
+
+        return view('admin.venue.edit')->withVenue($venue);
     }
 
     /**
@@ -98,9 +134,34 @@ class VenueController extends Controller
      * @param  \App\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Venue $venue)
+    public function update(Request $request, $slug)
     {
-        //
+        $venue = Venue::where('slug', '=', $slug)->firstOrFail();
+
+        $this->validate($request, array(
+            'name' => 'required|max:255',
+            'facebook' => '',
+            'lat' => '',
+            'lng' => '',
+        ));
+
+        $venue->slug = $request->name;
+        $delimiter = '-';
+        $venue->slug = iconv('UTF-8', 'ASCII//TRANSLIT', $venue->slug);
+        $venue->slug = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $venue->slug);
+        $venue->slug = preg_replace("/[\/_|+ -]+/", $delimiter, $venue->slug);
+        $venue->slug = strtolower(trim($venue->slug, $delimiter));
+
+        $venue->name = $request->name;
+        $venue->facebook = $request->facebook;
+        $venue->lat = $request->lat;
+        $venue->lng = $request->lng;
+
+        $venue->save();
+
+        Session::flash('success', 'Venue Updated');
+
+        return redirect()->route('admin.venue.index');
     }
 
     /**
@@ -109,8 +170,12 @@ class VenueController extends Controller
      * @param  \App\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Venue $venue)
+    public function destroy($id)
     {
-        //
+        $venue = Venue::findorFail($id);
+        $venue->delete();
+
+        Session::flash('success', 'Venue Deleted');
+        return redirect()->route('admin.venue.index');
     }
 }
