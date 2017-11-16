@@ -84,6 +84,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
+                    <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
                     <button type="submit" class="btn btn-primary">Create Post</button>
                 </div>
             </div>

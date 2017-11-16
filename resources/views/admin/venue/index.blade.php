@@ -48,13 +48,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{$venue->name}}</h5>
+                    <h2 class="modal-title" id="exampleModalLabel">Delete <span style="text-transform:uppercase;">{{$venue->name}}</span>?</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete <b>{{$venue->name}}</b> venue?
+                    Are you sure you want to delete <span style="text-transform:uppercase;font-weight:bold;">{{$venue->name}}</span> venue?
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="{{route('admin.venue.destroy', $venue->id)}}">

@@ -51,13 +51,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{$tag->title}}</h5>
+                    <h2 class="modal-title" id="exampleModalLabel">Delete <span style="text-transform:uppercase;">{{$tag->title}}</span>?</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete <b>{{$tag->title}}</b> tag?
+                    Are you sure you want to delete <span style="text-transform:uppercase;font-weight:bold;">{{$tag->title}}</span> tag?
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="{{route('admin.tag.destroy', $tag->id)}}">

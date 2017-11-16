@@ -19,9 +19,8 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="{{route('posts')}}">Posts</a>
-                </li>
+                <li><a href="{{route('posts')}}">Posts</a></li>
+                <li><a href="{{route('events')}}">Events</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -38,6 +37,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('admin')}}">Admin Home</a></li>
                             <li><a href="{{route('admin.tag.index')}}">Tags</a></li>
+                            <li><a href="{{route('admin.event.index')}}">Events</a></li>
                             <li><a href="{{route('admin.post.index')}}">Posts</a></li>
                             <li>
                                 <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

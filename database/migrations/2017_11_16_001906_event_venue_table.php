@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventTagTable extends Migration
+class EventVenueTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class EventTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_tag', function (Blueprint $table) {
+        Schema::create('event_venue', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
 
-            $table->integer('tag_id')->unsigned();
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->integer('venue_id')->unsigned();
+            $table->foreign('venue_id')->references('id')->on('venues');
         });
     }
 
@@ -30,6 +30,6 @@ class EventTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('event_tag');
+        Schema::drop('event_venue');
     }
 }
