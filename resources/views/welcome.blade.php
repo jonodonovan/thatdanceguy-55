@@ -8,7 +8,6 @@
 @section('style')
     <style type="text/css">
     	#mymap {
-      		border:1px solid red;
       		width: 100%;
       		height: 500px;
     	}
@@ -24,6 +23,11 @@
         </div>
         <div class="col-md-6">
             <h2>Upcoming Events</h2>
+            <ul>
+            @foreach ($upcomingevents as $upcomingevent)
+                <li>{{$upcomingevent->name}}</li>
+            @endforeach
+            </ul>
         </div>
     </div>
 

@@ -9,6 +9,7 @@
 
     <h1 style="text-transform: uppercase;">{{$event->name}}</h1>
     <h2>{{$event->intro}}</h2>
+    <p><a href="{{url('admin/venue/'.$event->venue->slug)}}">{{$event->venue->name}}</a></p>
     <p>{{$event->description}}</p>
     <p>{{$event->facebook}}</p>
 

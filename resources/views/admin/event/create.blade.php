@@ -14,8 +14,16 @@
                 <div class="form-group">
                     <label for="exampleSelect2">Tag</label>
                     <select multiple class="form-control" id="tagselect" name="tagselect[]">
-                        @foreach ($alltags as $tag)
+                        @foreach ($tags as $tag)
                             <option value="{{$tag->id}}">{{$tag->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleSelect2">Venue</label>
+                    <select class="form-control" id="venue_id" name="venue_id">
+                        @foreach ($venues as $venue)
+                            <option value="{{$venue->id}}">{{$venue->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -74,6 +82,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Create Event</button>
+                <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
             </div>
         </div>
     </form>

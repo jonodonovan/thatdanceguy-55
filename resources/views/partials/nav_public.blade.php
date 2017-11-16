@@ -37,6 +37,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('admin')}}">Admin Home</a></li>
                             <li><a href="{{route('admin.tag.index')}}">Tags</a></li>
+                            <li><a href="{{route('admin.venue.index')}}">Venues</a></li>
                             <li><a href="{{route('admin.event.index')}}">Events</a></li>
                             <li><a href="{{route('admin.post.index')}}">Posts</a></li>
                             <li>

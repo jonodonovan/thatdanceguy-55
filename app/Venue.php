@@ -16,6 +16,22 @@ class Venue extends Model
     */
     protected $dates = ['deleted_at'];
 
+    /**
+    * Override parent boot and Call deleting event
+    *
+    * @return void
+    */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($venues) {
+            foreach ($venues->events()->get() as $event) {
+                $event->delete();
+            }
+        });
+    }
+
     public function events()
     {
         return $this->hasMany('App\Event');

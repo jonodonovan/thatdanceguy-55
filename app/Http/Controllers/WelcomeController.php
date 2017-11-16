@@ -12,6 +12,7 @@ class WelcomeController extends Controller
     {
         $posts = Post::orderBy('title')->get();
         $events = Event::orderBy('id')->get();
-        return view('welcome')->withPosts($posts)->withEvents($events);
+        $upcomingevents = Event::orderBy('startdatetime')->get();
+        return view('welcome')->withPosts($posts)->withEvents($events)->withUpcomingevents($upcomingevents);
     }
 }

@@ -25,7 +25,8 @@ class CreateEventsTable extends Migration
             $table->string('facebook')->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
-            $table->integer('venue_id')->nullable()->unsigned();
+            $table->integer('venue_id')->unsigned();
+            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

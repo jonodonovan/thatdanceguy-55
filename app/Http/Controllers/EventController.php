@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Tag;
+use App\Venue;
 use Illuminate\Http\Request;
 use Session;
 
@@ -85,9 +86,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        $alltags = Tag::orderBy('title')->get();
+        $tags = Tag::orderBy('title')->get();
+        $venues = Venue::orderBy('name')->get();
 
-        return view('admin.event.create')->withAlltags($alltags);
+        return view('admin.event.create')->withTags($tags)->withVenues($venues);
     }
 
     /**
@@ -149,7 +151,7 @@ class EventController extends Controller
 
         Session::flash('success', 'New Event Created');
 
-        return redirect()->route('admin.event.create');
+        return redirect()->route('admin.event.index');
     }
 
     /**
@@ -257,6 +259,6 @@ class EventController extends Controller
 
         Session::flash('success', 'Event deleted');
 
-        return redirect()->route('events.index');
+        return redirect()->route('admin.event.index');
     }
 }

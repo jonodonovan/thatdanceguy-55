@@ -36,8 +36,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12 text-center">
-                        <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
                         <button type="submit" class="btn btn-primary">Create Venue</button>
+                        <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
                     </div>
                 </div>
             </div>
