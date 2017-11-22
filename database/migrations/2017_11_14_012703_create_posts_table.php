@@ -20,6 +20,8 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('image')->nullable();
             $table->text('body')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('startdatetime')->nullable();
             $table->dateTime('enddatetime')->nullable();
             $table->softDeletes();

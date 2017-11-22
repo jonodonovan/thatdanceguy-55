@@ -13,8 +13,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th style="width:30%">Name</th>
-                                <th style="width:50%">Intro</th>
+                                <th style="width:10%">Name</th>
+                                <th style="width:20%">Start</th>
+                                <th style="width:20%">End</th>
+                                <th style="width:30%">Intro</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,12 +28,10 @@
 
                             <tr>
                                 <th>{{$count++}}</th>
-                                <td>
-                                    <a href="{{url('admin/event/'.$event->slug)}}">{{$event->name}}</a>
-                                </td>
-                                <td>
-                                    {{$event->intro}}
-                                </td>
+                                <td><a href="{{url('admin/event/'.$event->slug)}}">{{$event->name}}</a></td>
+                                <td>{{$event->startdatetime->toDayDateTimeString()}}</td>
+                                <td>{{$event->enddatetime->toDayDateTimeString()}}</td>
+                                <td>{{$event->intro}}</td>
                                 <td>
                                     <a href="{{url('admin/event/'.$event->slug.'/edit')}}">edit</a> |
                                     <a href="#" data-toggle="modal" data-target="#{{$event->id}}">delete</a>

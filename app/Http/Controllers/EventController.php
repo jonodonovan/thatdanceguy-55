@@ -27,10 +27,10 @@ class EventController extends Controller
      */
     public function public()
     {
-        $posts = Post::orderBy('title')->get();
-        $tags = Tag::all()->unique('title');
+        $events = Event::orderBy('name')->get();
+        $tags = Tag::all()->unique('name');
 
-        return view('public.post.index')->withPosts($posts)->withTags($tags);
+        return view('public.event.index')->withEvents($events)->withTags($tags);
     }
 
     /**
@@ -40,17 +40,10 @@ class EventController extends Controller
      */
     public function publicshow($slug)
     {
-        $post = Post::where('slug', '=', $slug)->firstOrFail();
-        $alltags = Tag::orderBy('title')->get();
+        $event = Event::where('slug', '=', $slug)->firstOrFail();
+        $tags = Tag::all()->unique('name');
 
-        $tags = $post->tags->modelKeys();
-        $similarthings = Post::whereHas('tags', function ($q) use ($tags) {
-            $q->whereIn('tags.id', $tags);
-        })->where('id', '<>', $post->id)->orderBy('id', 'asc')->get();
-
-        $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
-
-        return view('public.post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+        return view('public.event.show')->withEvent($event)->withTags($tags);
     }
 
     /**
@@ -177,8 +170,9 @@ class EventController extends Controller
     {
         $event = Event::where('slug', '=', $slug)->firstOrFail();
         $tags = Tag::all()->unique('title');
+        $venues = Venue::orderBy('name')->get();
 
-        return view('admin.event.edit')->withEvent($event)->withTags($tags);
+        return view('admin.event.edit')->withEvent($event)->withTags($tags)->withVenues($venues);
     }
 
     /**

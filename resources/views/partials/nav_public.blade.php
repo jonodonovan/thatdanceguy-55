@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-fixed-side">
     <div class="container">
         <div class="navbar-header">
 
@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{url('/')}}">
-                {{config('app.name', 'Laravel')}}
+                <img alt="logo" src="/theme/logo.png">
             </a>
         </div>
 
@@ -21,6 +21,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{route('posts')}}">Posts</a></li>
                 <li><a href="{{route('events')}}">Events</a></li>
+                <li><a href="{{route('venues')}}">Venues</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

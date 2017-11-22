@@ -6,6 +6,12 @@
                 <div class="alert alert-success" role="alert">
                     <strong>Success:</strong> {{ Session::get('success') }}
                 </div>
+                @section('script_footer')
+                    <script type="text/javascript">
+                        $(".alert-success").alert();
+                        window.setTimeout(function() { $(".alert-success").alert('close'); }, 2000);
+                    </script>
+                @endsection
 
             @endif
 
@@ -23,20 +29,15 @@
 
                     </ul>
                 </div>
+                @section('script_footer')
+                    <script type="text/javascript">
+                        $(".alert-success").alert();
+                        window.setTimeout(function() { $(".alert-success").alert('close'); }, 2000);
+                    </script>
+                @endsection
 
             @endif
 
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{session('status')}}
-                </div>
-            @endif
         </div>
     </div>
 </div>
-@section('script_footer')
-    <script type="text/javascript">
-        $(".alert-success").alert();
-        window.setTimeout(function() { $(".alert-success").alert('close'); }, 2000);
-    </script>
-@endsection

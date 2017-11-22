@@ -1,28 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div style="margin-top:-50px;margin-bottom:50px;">
+        <div class="row" style="text-align:center;height:300px;background-color:#1c75bc;color:white;">
+            @if ($post->image)
+                <img src="{{url('images/'.$post->image)}}" class="img-responsive" alt="Responsive image">
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-xs-offset-1" style="background-color:white;padding:20px;">
+                <h1 style="text-transform: uppercase;">{{$post->title}}</h1>
+                <p class="small" style="font-style: italic;">Posted: {{$post->startdatetime->toDayDateTimeString()}}</p>
+                <p>{!!nl2br($post->body)!!}</p>
+            </div>
+            <div class="col-md-3">
+                <div class="sidebar-module sidebar-module-inset" style="background-color:white;padding: 10px;">
+                    @foreach ($post->tags as $tag)
+                        <a href="{{url('tags/'.$tag->slug)}}">{{$tag->title}}</a><br>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11 col-xs-offset-1">
 
-        @if ($post->image)
-            <img src="{{url('images/'.$post->image)}}" class="img-thumbnail" alt="Responsive image">
-        @endif
-
-        <h1 style="text-transform: uppercase;">{{$post->title}}</h1>
-        {{-- <span class="badge badge-secondary">Start: {{$post->startdatetime->toDayDateTimeString()}}</span> <span class="badge badge-secondary">End: {{$post->enddatetime->toDayDateTimeString()}}</span><br> --}}
-        <p>{!!nl2br($post->body)!!}</p>
-
-        @foreach ($post->tags as $tag)
-            <a href="{{url('tags/'.$tag->slug)}}" class="badge badge-info">{{$tag->title}}</a>
-        @endforeach
-
-        <br /><br>
-
-        @if (count($similarthings) > 0)
-            <h2>Similar Posts</h2>
-            @foreach ($similarthings as $sthing)
-                <p>{{$sthing->name}}</p>
-            @endforeach
-        @endif
+            </div>
+        </div>
     </div>
-
 @endsection

@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('script_header')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQhcjGnZdvndWtKz6gBmk6nRTTzbBVJlE" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQhcjGnZdvndWtKz6gBmk6nRTTzbBVJlE"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script>
 @endsection
 
 @section('style')
     <style type="text/css">
-    	#mymap {
+    	#map2 {
       		width: 100%;
       		height: 500px;
     	}
@@ -15,20 +17,56 @@
 @endsection
 
 @section('content')
-<div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <h2>Find an Event Near You</h2>
-            <div id="mymap"></div>
-        </div>
-        <div class="col-md-6">
-            <h2>Upcoming Events</h2>
-            <ul>
+        <div class="col-md-12 map-container" style="postion:relative;">
+            {{-- <div id="mymap"></div> --}}
+            <div id="map2" class="gmap3"></div>
+            <div id="maplinks" class="upcoming">
             @foreach ($upcomingevents as $upcomingevent)
-                <li>{{$upcomingevent->name}}</li>
+
+                {{-- <a style="color:white;text-decoration:none;" href="{{url('events/'.$upcomingevent->slug)}}"> --}}
+                <a style="color:white;text-decoration:none;" href="#" data-lat="{{$upcomingevent->lat}}" data-lon="{{$upcomingevent->lng}}" data-markerid="{{$upcomingevent->id}}">
+                    <div class="row upcoming-event-container">
+                        <div class="col-md-3 upcoming-event-date">
+                            {{$upcomingevent->startdatetime->format('M')}} <br>
+                            {{$upcomingevent->startdatetime->format('d')}}
+                        </div>
+                        <div class="col-md-9 upcoming-event-info">
+                            <span class="event-name">
+                                {{$upcomingevent->name}}
+                                <br>
+                            </span>
+                            <span class="event-tag">
+                                {{$upcomingevent->intro}}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
             @endforeach
-            </ul>
         </div>
+        </div>
+    </div>
+
+    <h2>All Events</h2>
+    <div class="row">
+        @foreach ($events as $event)
+
+            <div class="col-md-3 all-events">
+                <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
+                <div class="thumbnail">
+
+                    <div class="caption" style="text-align:center;">
+                        <h3 style="font-weight:bold;">{{$event->name}}</h3>
+                        <p>{{$event->intro}}</p>
+                        <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</p>
+                        <p>{{$event->startdatetime->format('ga')}} - {{$event->enddatetime->format('ga')}}</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+        @endforeach
     </div>
 
     <h2>Latest Posts</h2>
@@ -42,9 +80,6 @@
                     <div class="caption">
                         <h3>{{$post->title}}</h3>
                         <p>{{$post->intro}}</p>
-                        @foreach ($post->tags as $tag)
-                            <a href="{{url('tags/'.$tag->slug)}}" class="badge badge-info">{{$tag->title}}</a>
-                        @endforeach
                         <p>
                             <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
                         </p>
@@ -53,31 +88,95 @@
             </div>
         @endforeach
     </div>
-</div>
 @endsection
 
 @section('script_footer')
-    <script type="text/javascript">
+<script>
 
-        var events = <?php print_r(json_encode($events)) ?>;
+$(function () {
+    var gmap, infowindow;
+    var markers = [];
 
-        var mymap = new GMaps({
-          el: '#mymap',
-          lat: 27.9769107,
-          lng: -82.1600645,
-          zoom:14
-        });
+    $('#maplinks a').each(function () {
+        var $this = $(this);
+        var htmltxt = $this.html();
+        var position = {lat: parseFloat($this.data('lat')), lng: parseFloat($this.data('lon'))};
+        var data = {
+            position: position,
+            id: $this.data('markerid'),
+            data: "<div class='event-map'>" + htmltxt + "</div>"
+        };
 
-        $.each( events, function( index, value ){
-            mymap.addMarker({
-            lat: value.lat,
-            lng: value.lng,
-            title: value.name,
-            infoWindow: {
-                content: '<h1>'+value.name+'</h1>'
+        $this.click(function () {
+            event.preventDefault();
+            if (infowindow && data.marker) {
+              infowindow.setContent(htmltxt);
+              gmap.setZoom(16);
+              gmap.panTo(position);
+              infowindow.open(gmap, data.marker);
             }
-            });
         });
+        markers.push(data);
+    });
 
-  </script>
+    $("#map2")
+    .gmap3({
+        center: [27.950078, -82.451228],
+        zoom: 10,
+        styles:
+        [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+    })
+    .then(function (_gmap) {
+        gmap = _gmap;
+    })
+    .infowindow({
+        content: ''
+    })
+    .then(function (iw) {
+        infowindow = iw;
+    })
+    .cluster({
+        size: 200,
+        markers: markers,
+        cb: function (markers) {
+            // if (markers.length > 1) { // 1 marker stay unchanged (because cb returns nothing)
+            //     if (markers.length < 20) {
+            //         return {
+            //             content: "<div class='cluster cluster-1' style='color:white;'>" + markers.length + "</div>",
+            //             x: -26,
+            //             y: -26
+            //         };
+            //     }
+            //     if (markers.length < 50) {
+            //         return {
+            //             content: "<div class='cluster cluster-2'>" + markers.length + "</div>",
+            //             x: -26,
+            //             y: -26
+            //         };
+            //     }
+            //     return {
+            //         content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
+            //         x: -33,
+            //         y: -33
+            //     };
+            // }
+        }
+    })
+    .then(function (cluster) {
+        $.each(cluster.markers(), function (_, marker) {
+            $.each(markers, function (_, data) {
+                if (data.id === marker.id) {
+                    data.marker = marker;
+                }
+            });
+        })
+    })
+    .on('click', function (marker, clusterOverlay, cluster, event) {
+        if (marker) {
+            infowindow.setContent(marker.data);
+            infowindow.open(marker.getMap(), marker);
+        }
+    });
+});
+</script>
 @endsection

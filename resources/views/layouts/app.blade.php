@@ -19,14 +19,21 @@
 
 </head>
 <body>
-    <div id="app">
-        @include('partials.nav_public')
-        @include('partials.alerts')
-        @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-lg-2">
+                @include('partials.nav_public')
+            </div>
+            <div class="col-sm-9 col-lg-10">
+                @include('partials.alerts')
+                @yield('content')
+            </div>
+        </div>
     </div>
+    <div id="app"></div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     @yield('script_footer')
 
 </body>

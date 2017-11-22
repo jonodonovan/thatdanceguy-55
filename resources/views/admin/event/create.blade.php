@@ -81,8 +81,8 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Create Event</button>
-                <a class="btn btn-default" href="{{route('admin.post.index')}}">Cancel</a>
+                <a class="btn btn-default" href="{{route('admin.event.index')}}">Cancel</a>
+                <button type="submit" class="btn btn-success">Create Event</button>
             </div>
         </div>
     </form>

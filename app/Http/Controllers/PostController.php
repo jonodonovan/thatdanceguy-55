@@ -103,6 +103,7 @@ class PostController extends Controller
         $post->slug = preg_replace("/[\/_|+ -]+/", $delimiter, $post->slug);
         $post->slug = strtolower(trim($post->slug, $delimiter));
 
+        $post->user_id = Auth::user()->id;
         $post->title = $request->title;
         $post->intro = $request->intro;
         $post->body = $request->body;
@@ -195,9 +196,15 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->intro = $request->intro;
         $post->body = $request->body;
-        $post->image = $request->image;
         $post->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $post->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
+
+        if ($request->image)
+        {
+            $imagename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $imagename);
+            $post->image = $imagename;
+        }
 
         $post->save();
 

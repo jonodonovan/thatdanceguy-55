@@ -1,5 +1,15 @@
+body {
+    background-color: #212121;
+}
+.navbar-default {
+    background-color: #000;
+    border: none;
+}
+
 .thumbnail {
     padding: 0px;
+    border: none;
+    border-radius: 0px;
 }
 .thumbnail > img, .thumbnail a > img {
     width: 100%;
@@ -12,9 +22,9 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.caption p > a {
-    width: 100%;
-}
+// .caption p > a {
+//     width: 100%;
+// }
 .caption p {
     margin-bottom: 5px;
 }
