@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container m-b-100">
-    <h1 style="text-transform:uppercase;">Create a new event</h1>
+<div class="page-wrapper" style="background-color:white;padding:50px;">
     <form method="POST" action="{{route('admin.event.store')}}" enctype="multipart/form-data">
     {{csrf_field()}}
         <div class="row">
+            <h1 style="text-transform:uppercase;">Create a new event</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Name</label>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="row  m-b-40">
+        <div class="row">
             <div class="col-md-4">
                 <div class="form-group {{$errors->has('image') ? ' has-error' : ''}}">
                     <label for="image" class="control-label">Event Image Banner</label><br />
@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <a class="btn btn-default" href="{{route('admin.event.index')}}">Cancel</a>
-                <button type="submit" class="btn btn-success">Create Event</button>
+                <button type="submit" class="btn btn-primary">Create Event</button>
             </div>
         </div>
     </form>

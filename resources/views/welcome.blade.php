@@ -18,58 +18,65 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12 map-container" style="postion:relative;">
-            {{-- <div id="mymap"></div> --}}
-            <div id="map2" class="gmap3"></div>
-            <div id="maplinks" class="upcoming">
-            @foreach ($upcomingevents as $upcomingevent)
-
-                {{-- <a style="color:white;text-decoration:none;" href="{{url('events/'.$upcomingevent->slug)}}"> --}}
-                <a style="color:white;text-decoration:none;" href="#" data-lat="{{$upcomingevent->lat}}" data-lon="{{$upcomingevent->lng}}" data-markerid="{{$upcomingevent->id}}">
-                    <div class="row upcoming-event-container">
-                        <div class="col-md-3 upcoming-event-date">
-                            {{$upcomingevent->startdatetime->format('M')}} <br>
-                            {{$upcomingevent->startdatetime->format('d')}}
+        <div class="col-md-12">
+            <div class="map-container">
+                {{-- <div id="mymap"></div> --}}
+                <div id="map2" class="gmap3"></div>
+                <div id="maplinks" class="upcoming">
+                @foreach ($upcomingevents as $upcomingevent)
+                    {{-- <a style="color:white;text-decoration:none;" href="{{url('events/'.$upcomingevent->slug)}}"> --}}
+                    <a style="color:white;text-decoration:none;" href="#" data-lat="{{$upcomingevent->lat}}" data-lon="{{$upcomingevent->lng}}" data-markerid="{{$upcomingevent->id}}">
+                        <div class="row upcoming-event-container">
+                            <div class="col-md-3 upcoming-event-date">
+                                {{$upcomingevent->startdatetime->format('M')}} <br>
+                                {{$upcomingevent->startdatetime->format('d')}}
+                            </div>
+                            <div class="col-md-9 upcoming-event-info">
+                                <span class="event-name">
+                                    {{$upcomingevent->name}}
+                                    <br>
+                                </span>
+                                <span class="event-tag">
+                                    {{$upcomingevent->intro}}
+                                </span>
+                            </div>
                         </div>
-                        <div class="col-md-9 upcoming-event-info">
-                            <span class="event-name">
-                                {{$upcomingevent->name}}
-                                <br>
-                            </span>
-                            <span class="event-tag">
-                                {{$upcomingevent->intro}}
-                            </span>
-                        </div>
-                    </div>
-                </a>
-
-            @endforeach
-        </div>
+                    </a>
+                @endforeach
+                </div>
+            </div>
         </div>
     </div>
 
-    <h2>All Events</h2>
+    <div class="row" style="padding:15px;">
+        <div class="col-md-12">
+            <h3>All Events</h3>
+        </div>
+    </div>
     <div class="row">
         @foreach ($events as $event)
-
-            <div class="col-md-3 all-events">
-                <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
-                <div class="thumbnail">
-
-                    <div class="caption" style="text-align:center;">
-                        <h3 style="font-weight:bold;">{{$event->name}}</h3>
-                        <p>{{$event->intro}}</p>
-                        <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</p>
-                        <p>{{$event->startdatetime->format('ga')}} - {{$event->enddatetime->format('ga')}}</p>
+            <div class="col-md-3">
+                <div class="all-events">
+                    <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
+                    <div class="thumbnail">
+                        <div class="caption" style="text-align:center;">
+                            <h3 style="font-weight:bold;">{{$event->name}}</h3>
+                            <p>{{$event->intro}}</p>
+                            <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</p>
+                            <p>{{$event->startdatetime->format('ga')}} - {{$event->enddatetime->format('ga')}}</p>
+                        </div>
                     </div>
+                    </a>
                 </div>
-                </a>
             </div>
-
         @endforeach
     </div>
 
-    <h2>Latest Posts</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Latest Posts</h3>
+        </div>
+    </div>
     <div class="row">
         @foreach ($posts as $post)
             <div class="col-md-3">

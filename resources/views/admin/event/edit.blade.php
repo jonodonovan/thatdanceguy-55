@@ -9,12 +9,12 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <h1 style="text-transform:uppercase;">Editing {{$event->title}}</h1>
+<div class="page-wrapper" style="background-color:white;padding:50px;">
     <form method="POST" action="{{route('admin.event.update', $event->slug)}}" enctype="multipart/form-data">
-        {{method_field('PATCH')}}
-        {{csrf_field()}}
+    {{method_field('PATCH')}}
+    {{csrf_field()}}
         <div class="row">
+            <h1 style="text-transform:uppercase;">Editing {{$event->title}}</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Name</label>
@@ -97,7 +97,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <a class="btn btn-default" href="{{route('admin.event.index')}}">Cancel</a>
-                <button type="submit" class="btn btn-success">Save Event</button>
+                <button type="submit" class="btn btn-primary">Save Event</button>
             </div>
         </div>
     </form>

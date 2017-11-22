@@ -32,17 +32,17 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                            {{Auth::user()->name}} <span class="caret"></span>
+                            Welcome {{Auth::user()->name}} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('admin')}}">Admin Home</a></li>
-                            <li><a href="{{route('admin.tag.index')}}">Tags</a></li>
-                            <li><a href="{{route('admin.venue.index')}}">Venues</a></li>
-                            <li><a href="{{route('admin.event.index')}}">Events</a></li>
-                            <li><a href="{{route('admin.post.index')}}">Posts</a></li>
+                            <li><a href="{{route('admin')}}"><i class="fa fa-home" aria-hidden="true"></i> Admin Home</a></li>
+                            <li><a href="{{route('admin.tag.index')}}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
+                            <li><a href="{{route('admin.venue.index')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Venues</a></li>
+                            <li><a href="{{route('admin.event.index')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Events</a></li>
+                            <li><a href="{{route('admin.post.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a></li>
                             <li>
-                                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 
                                 <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                                     {{csrf_field()}}

@@ -1,44 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="page-wrapper" style="background-color:white;padding:50px;">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="{{route('admin')}}">Admin</a> - All Venues | <small><a href="{{route('admin.venue.create')}}">new</a></small>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th style="width:30%">Title</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        <?php  $count = 1; ?>
-
-                        @foreach ($venues as $venue)
-                            <tr>
-                                <th>{{$count++}}</th>
-                                <td>
-                                    <a href="{{url('admin/venue/'.$venue->slug)}}">{{$venue->name}}</a>
-                                </td>
-                                <td>
-                                    <a href="{{url('admin/venue/'.$venue->slug.'/edit')}}">edit</a> |
-                                    <a href="#" data-toggle="modal" data-target="#{{$venue->id}}">delete</a>
-                                </td>
-                            </tr>
-
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <h2>All Venues</h2>
+            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.venue.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th style="width:30%">Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php  $count = 1; ?>
+                @foreach ($venues as $venue)
+                    <tr>
+                        <th>{{$count++}}</th>
+                        <td>
+                            <a href="{{url('admin/venue/'.$venue->slug)}}">{{$venue->name}}</a>
+                        </td>
+                        <td>
+                            <a href="{{url('admin/venue/'.$venue->slug.'/edit')}}">edit</a> |
+                            <a href="#" data-toggle="modal" data-target="#{{$venue->id}}">delete</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -61,7 +52,7 @@
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger">Yes, delete!</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel!</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel!</button>
                     </form>
                 </div>
             </div>

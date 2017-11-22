@@ -1,47 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="page-wrapper" style="background-color:white;padding:50px;">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="{{route('admin')}}">Admin</a> - All Tags | <small><a href="{{route('admin.tag.create')}}">new</a></small>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th style="width:30%">Title</th>
-                                <th style="width:50%">Description</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        <?php  $count = 1; ?>
-
-                        @foreach ($tags as $tag)
-                            <tr>
-                                <th>{{$count++}}</th>
-                                <td>
-                                    <a href="{{url('admin/tag/'.$tag->slug)}}">{{$tag->title}}</a>
-                                </td>
-                                <td>
-                                    {{$tag->description}}
-                                </td>
-                                <td>
-                                    <a href="{{url('admin/tag/'.$tag->slug.'/edit')}}">edit</a> | <a href="#" data-toggle="modal" data-target="#{{$tag->id}}">delete</a>
-                                </td>
-                            </tr>
-
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <h2>All Tags</h2>
+            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.tag.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th style="width:30%">Title</th>
+                        <th style="width:50%">Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php  $count = 1; ?>
+                @foreach ($tags as $tag)
+                    <tr>
+                        <th>{{$count++}}</th>
+                        <td>
+                            <a href="{{url('admin/tag/'.$tag->slug)}}">{{$tag->title}}</a>
+                        </td>
+                        <td>
+                            {{$tag->description}}
+                        </td>
+                        <td>
+                            <a href="{{url('admin/tag/'.$tag->slug.'/edit')}}">edit</a> | <a href="#" data-toggle="modal" data-target="#{{$tag->id}}">delete</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -64,7 +55,7 @@
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger">Yes, delete!</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel!</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel!</button>
                     </form>
                 </div>
             </div>

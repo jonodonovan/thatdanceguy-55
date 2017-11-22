@@ -6,6 +6,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Session;
+use Auth;
 
 class PostController extends Controller
 {

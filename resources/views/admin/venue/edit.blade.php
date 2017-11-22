@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 style="text-transform:uppercase;">Editing {{$venue->name}}</h1>
+<div class="page-wrapper" style="background-color:white;padding:50px;">
     <form method="POST" action="{{ route('admin.venue.update', $venue->slug) }}">
-        {{ method_field('PATCH')}}
-        {{ csrf_field() }}
+    {{ method_field('PATCH')}}
+    {{ csrf_field() }}
         <div class="row">
+            <h1 style="text-transform:uppercase;">Editing {{$venue->name}}</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Name</label>
