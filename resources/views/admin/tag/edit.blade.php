@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="page-wrapper" style="background-color:white;padding:50px;">
+<div class="page-wrapper">
     <form method="POST" action="{{ route('admin.tag.update', $tag->slug) }}">
     {{ method_field('PATCH')}}
     {{ csrf_field() }}
@@ -25,7 +25,7 @@
                 <a class="btn btn-default" href="{{route('admin.tag.index')}}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Save Tag</button>
             </div>
-        </div>    
+        </div>
     </form>
 </div>
 @endsection

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div style="margin-top:-50px;margin-bottom:50px;">
+    <div style="margin-bottom:50px;">
         <div class="row" style="text-align:center;height:300px;background-color:#1c75bc;color:white;">
             @if ($post->image)
                 <img src="{{url('images/'.$post->image)}}" class="img-responsive" alt="Responsive image">
             @endif
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:-50px;">
             <div class="col-md-7 col-xs-offset-1" style="background-color:white;padding:20px;">
                 <h1 style="text-transform: uppercase;">{{$post->title}}</h1>
                 <p class="small" style="font-style: italic;">Posted: {{$post->startdatetime->toDayDateTimeString()}}</p>

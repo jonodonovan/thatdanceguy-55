@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="page-wrapper" style="background-color:white;padding:50px;">
+<div class="page-wrapper">
     <form method="POST" action="{{route('admin.venue.store')}}">
     {{csrf_field()}}
         <div class="row">

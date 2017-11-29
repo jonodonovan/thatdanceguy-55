@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="page-wrapper" style="background-color:white;padding:50px;">
+<div class="page-wrapper">
     <form method="POST" action="{{route('admin.post.update', $post->slug)}}" enctype="multipart/form-data">
     {{method_field('PATCH')}}
     {{csrf_field()}}

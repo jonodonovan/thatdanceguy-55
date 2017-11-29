@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="page-wrapper" style="background-color:white;padding:50px;">
+<div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
             <h2>All Tags</h2>
