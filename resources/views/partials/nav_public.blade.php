@@ -22,6 +22,7 @@
                 <li><a href="{{route('posts')}}">Posts</a></li>
                 <li><a href="{{route('events')}}">Events</a></li>
                 <li><a href="{{route('venues')}}">Venues</a></li>
+                <li><a href="{{route('venues')}}">Partners</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
