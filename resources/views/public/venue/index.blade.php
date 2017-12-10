@@ -4,25 +4,24 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>All Venues</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php  $count = 1; ?>
-                @foreach ($venues as $venue)
-                    <tr>
-                        <th>{{$count++}}</th>
-                        <td><a href="{{url('venues/'.$venue->slug)}}">{{$venue->name}}</a></td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <h2 style="margin-bottom:50px;">Search by Venue</h2>
         </div>
+    </div>
+    <div class="row">
+        @foreach ($venues as $venue)
+            <div class="col-md-3">
+                <div class="all-events">
+                    <a href="{{url('venues/'.$venue->slug)}}" style="text-decoration:none;">
+                    <div class="thumbnail" style="border: 2px solid #000000;">
+                        <div class="caption" style="">
+                            <h3 style="font-weight:bold;">{{$venue->name}}</h3>
+                            <p>Upcoming Events: <span class="label @if($venue->events->count() >= 1) label-success @else label-default @endif">{{$venue->events->count()}}</span></p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection

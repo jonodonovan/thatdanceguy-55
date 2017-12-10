@@ -5,10 +5,12 @@
     <div class="row">
         <div class="col-md-12">
             <h1>{{$event->name}}</h1>
-            <p>Start: {{$event->startdatetime->toDayDateTimeString()}} | End: {{$event->enddatetime->toDayDateTimeString()}}</p>
-            @foreach ($event->tags as $tag)
+            <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}} from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</p>
+            <p style="font-style: italic;">{{$event->intro}}</p>
+            <p>{{$event->description}}</p>
+            {{-- @foreach ($event->tags as $tag)
                 <a href="/tags/{{$tag->slug}}">{{$tag->title}}</a>
-            @endforeach
+            @endforeach --}}
         </div>
     </div>
 </div>

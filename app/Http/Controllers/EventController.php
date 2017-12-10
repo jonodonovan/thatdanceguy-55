@@ -122,9 +122,14 @@ class EventController extends Controller
         $event->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
         $event->facebook = $request->facebook;
-        $event->lat = $request->lat;
-        $event->lng = $request->lng;
         $event->venue_id = $request->venue_id;
+
+        if (! $request->lat) {
+            $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
+
+            $event->lat = $venue->lat;
+            $event->lng = $venue->lng;
+        }
 
         if ($request->image)
         {
@@ -213,9 +218,14 @@ class EventController extends Controller
         $event->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
         $event->facebook = $request->facebook;
-        $event->lat = $request->lat;
-        $event->lng = $request->lng;
         $event->venue_id = $request->venue_id;
+
+        if (! $request->lat) {
+            $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
+
+            $event->lat = $venue->lat;
+            $event->lng = $venue->lng;
+        }
 
         if ($request->image)
         {

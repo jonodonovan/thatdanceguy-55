@@ -8625,9 +8625,10 @@ body {
 }
 
 .thumbnail {
-  padding: 0px;
   border: none;
   border-radius: 0px;
+  padding: 20px;
+  background-color: white;
 }
 
 .thumbnail > img,

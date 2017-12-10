@@ -34,7 +34,7 @@
             <div class="col-md-3" style="padding:0 5px;">
                 <div class="all-events">
                     <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
-                    <div class="thumbnail" style="padding:20px;background-color:white;">
+                    <div class="thumbnail">
                         <div class="caption" style="text-align:left;">
                             <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$event->name}}</h3>
                             <small style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</small>
@@ -58,7 +58,7 @@
     <div class="row">
         @foreach ($posts as $post)
             <div class="col-md-3" style="padding:0 5px;">
-                <div class="thumbnail" style="padding:20px;background-color:white;">
+                <div class="thumbnail">
                     @if ($post->image)
                         <img src="{{url('images/'.$post->image)}}" class="" alt="{{$post->title}} image">
                     @endif

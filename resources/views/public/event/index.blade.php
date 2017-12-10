@@ -4,7 +4,7 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>Upcoming Events</h2>
+            <h2 style="margin-bottom:50px;">Upcoming Events</h2>
         </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
             <div class="col-md-3">
                 <div class="all-events">
                     <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
-                    <div class="thumbnail">
+                    <div class="thumbnail" style="border: 2px solid #000000;">
                         <div class="caption" style="">
                             <h3 style="font-weight:bold;">{{$event->name}}</h3>
                             <p>{{$event->intro}}</p>

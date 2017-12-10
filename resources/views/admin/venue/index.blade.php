@@ -9,9 +9,12 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th style="width:30%">Title</th>
-                        <th>Action</th>
+                        <th style="width:5%">#</th>
+                        <th>Name</th>
+                        <th style="width:20%">Address</th>
+                        <th style="width:20%">City</th>
+                        <th style="width:20%">Phone</th>
+                        <th style="width:10%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +25,9 @@
                         <td>
                             <a href="{{url('admin/venue/'.$venue->slug)}}">{{$venue->name}}</a>
                         </td>
+                        <td>{{$venue->address}}</td>
+                        <td>{{$venue->city}}</td>
+                        <td>{{$venue->phone}}</td>
                         <td>
                             <a href="{{url('admin/venue/'.$venue->slug.'/edit')}}">edit</a> |
                             <a href="#" data-toggle="modal" data-target="#{{$venue->id}}">delete</a>

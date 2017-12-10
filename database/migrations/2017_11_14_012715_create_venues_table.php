@@ -17,9 +17,13 @@ class CreateVenuesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('city');
+            $table->string('zip');
             $table->string('facebook')->nullable();
-            $table->string('lat')->nullable();
-            $table->string('lng')->nullable();
+            $table->string('lat');
+            $table->string('lng');
             $table->softDeletes();
             $table->timestamps();
         });

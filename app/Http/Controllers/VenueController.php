@@ -74,6 +74,10 @@ class VenueController extends Controller
     {
         $this->validate($request, array(
             'name' => 'required|max:255|unique:venues,name',
+            'phone' => '',
+            'address' => '',
+            'city' => '',
+            'zip' => '',
             'facebook' => '',
             'lat' => '',
             'lng' => '',
@@ -89,6 +93,10 @@ class VenueController extends Controller
         $venue->slug = strtolower(trim($venue->slug, $delimiter));
 
         $venue->name = $request->name;
+        $venue->phone = $request->phone;
+        $venue->address = $request->address;
+        $venue->city = $request->city;
+        $venue->zip = $request->zip;
         $venue->facebook = $request->facebook;
         $venue->lat = $request->lat;
         $venue->lng = $request->lng;
@@ -140,6 +148,10 @@ class VenueController extends Controller
 
         $this->validate($request, array(
             'name' => 'required|max:255',
+            'phone' => '',
+            'address' => '',
+            'city' => '',
+            'zip' => '',
             'facebook' => '',
             'lat' => '',
             'lng' => '',
@@ -153,6 +165,10 @@ class VenueController extends Controller
         $venue->slug = strtolower(trim($venue->slug, $delimiter));
 
         $venue->name = $request->name;
+        $venue->phone = $request->phone;
+        $venue->address = $request->address;
+        $venue->city = $request->city;
+        $venue->zip = $request->zip;
         $venue->facebook = $request->facebook;
         $venue->lat = $request->lat;
         $venue->lng = $request->lng;
