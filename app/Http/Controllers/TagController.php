@@ -25,10 +25,9 @@ class TagController extends Controller
      */
     public function public()
     {
-        $posts = Post::orderBy('title')->get();
         $tags = Tag::all()->unique('title');
 
-        return view('public.post.index')->withPosts($posts)->withTags($tags);
+        return view('public.tag.index')->withTags($tags);
     }
 
     /**
@@ -38,17 +37,9 @@ class TagController extends Controller
      */
     public function publicshow($slug)
     {
-        $post = Post::where('slug', '=', $slug)->firstOrFail();
-        $alltags = Tag::orderBy('title')->get();
+        $tag = Tag::where('slug', '=', $slug)->firstOrFail();
 
-        $tags = $post->tags->modelKeys();
-        $similarthings = Post::whereHas('tags', function ($q) use ($tags) {
-            $q->whereIn('tags.id', $tags);
-        })->where('id', '<>', $post->id)->orderBy('id', 'asc')->get();
-
-        $similarthings_name = Post::where('title', '=', $post->title)->where('id', '<>', $post->id)->get();
-
-        return view('public.post.show')->withPost($post)->withTag($alltags)->withSimilarthings($similarthings)->withSimilarthings_name($similarthings_name);
+        return view('public.tag.show')->withTag($tag);
     }
 
     /**

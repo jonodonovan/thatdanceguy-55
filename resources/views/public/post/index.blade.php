@@ -4,29 +4,27 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>All Posts</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th style="width:20%">Title</th>
-                        <th style="width:20%">Intro</th>
-                        <th style="width:50%">Body</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php  $count = 1; ?>
-                @foreach ($posts as $post)
-                    <tr>
-                        <th>{{$count++}}</th>
-                        <td><a href="{{url('posts/'.$post->slug)}}">{{$post->title}}</a></td>
-                        <td>{{$post->intro}}</td>
-                        <td>{{$post->body}}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <h1>All Posts</h1>
         </div>
+    </div>
+    <div class="row">
+        @foreach ($posts as $post)
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    @if ($post->image)
+                        <img src="{{url('images/'.$post->image)}}" class="" alt="{{$post->title}} image">
+                    @endif
+                    <div class="caption">
+                        <h2>{{$post->title}}</h2>
+                        <small>Posted {{$post->startdatetime->format('F dS')}}</small>
+                        <p>{{$post->intro}}</p>
+                        <p>
+                            <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection

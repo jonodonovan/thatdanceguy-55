@@ -57,13 +57,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="startdate" class="control-label">Post Add Date & Time</label>
-                    <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                    <input id="startdatetime" type="text" class="form-control" name="startdatetime" value="{{$post->startdatetime or old('startdatetime')}}">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="enddatetime" class="control-label">Post Remove Date & Time</label>
-                    <input id="enddatetime" type="text" class="form-control" name="enddatetime">
+                    <input id="enddatetime" type="text" class="form-control" name="enddatetime" value="{{$post->enddatetime or old('enddatetime')}}">
                 </div>
             </div>
         </div>

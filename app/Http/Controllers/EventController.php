@@ -27,7 +27,7 @@ class EventController extends Controller
      */
     public function public()
     {
-        $events = Event::orderBy('name')->get();
+        $events = Event::orderBy('startdatetime')->get();
         $tags = Tag::all()->unique('name');
 
         return view('public.event.index')->withEvents($events)->withTags($tags);

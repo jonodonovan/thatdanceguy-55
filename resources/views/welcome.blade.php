@@ -17,7 +17,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
             <div class="map-container">
                 <div id="mymap"></div>
             </div>
@@ -25,21 +25,23 @@
     </div>
 
     <div class="row" style="padding:15px;">
-        <div class="col-md-12">
-            <h3>All Events</h3>
+        <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
+            <h3 style="color:white;text-transform:uppercase;">Upcoming Events</h3>
         </div>
     </div>
     <div class="row">
         @foreach ($events as $event)
-            <div class="col-md-3">
+            <div class="col-md-3" style="padding:0 5px;">
                 <div class="all-events">
                     <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
-                    <div class="thumbnail">
-                        <div class="caption" style="text-align:center;">
-                            <h3 style="font-weight:bold;">{{$event->name}}</h3>
+                    <div class="thumbnail" style="padding:20px;background-color:white;">
+                        <div class="caption" style="text-align:left;">
+                            <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$event->name}}</h3>
+                            <small style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</small>
+                            <small>From {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</small>
                             <p>{{$event->intro}}</p>
-                            <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</p>
-                            <p>{{$event->startdatetime->format('ga')}} - {{$event->enddatetime->format('ga')}}</p>
+
+
                         </div>
                     </div>
                     </a>
@@ -48,20 +50,20 @@
         @endforeach
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Latest Posts</h3>
+    <div class="row" style="padding:15px;">
+        <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
+            <h3 style="color:white;text-transform:uppercase;">Latest Posts</h3>
         </div>
     </div>
     <div class="row">
         @foreach ($posts as $post)
-            <div class="col-md-3">
-                <div class="thumbnail">
+            <div class="col-md-3" style="padding:0 5px;">
+                <div class="thumbnail" style="padding:20px;background-color:white;">
                     @if ($post->image)
                         <img src="{{url('images/'.$post->image)}}" class="" alt="{{$post->title}} image">
                     @endif
                     <div class="caption">
-                        <h3>{{$post->title}}</h3>
+                        <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$post->title}}</h3>
                         <p>{{$post->intro}}</p>
                         <p>
                             <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
@@ -83,7 +85,7 @@
           el: '#mymap',
           lat: 27.9769107,
           lng: -82.1600645,
-          zoom:14,
+          zoom:10,
           disableDefaultUI: true,
           styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
         });
@@ -95,7 +97,7 @@
                 lng: value.lng,
                 title: value.name,
                 infoWindow: {
-                    content: '<h1>'+value.name+'</h1><br /><a href="#">'+value.slug+'</a>'
+                    content: '<h1>'+value.name+'</h1><br /><a href="/events/'+value.slug+'">'+value.slug+'</a>'
                 }
             });
         });

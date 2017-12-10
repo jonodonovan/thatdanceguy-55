@@ -8,6 +8,9 @@ Route::get('posts/{slug}', 'PostController@publicshow')->name('posts.show');
 Route::get('events', 'EventController@public')->name('events');
 Route::get('events/{slug}', 'EventController@publicshow')->name('events.show');
 
+Route::get('tags', 'TagController@public')->name('tags');
+Route::get('tags/{slug}', 'TagController@publicshow')->name('tags.show');
+
 Route::get('venues', 'VenueController@public')->name('venues');
 Route::get('venues/{slug}', 'VenueController@publicshow')->name('venues.show');
 

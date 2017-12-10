@@ -10,7 +10,7 @@
         <div class="row" style="margin-top:-50px;">
             <div class="col-md-7 col-xs-offset-1" style="background-color:white;padding:20px;">
                 <h1 style="text-transform: uppercase;">{{$post->title}}</h1>
-                <p class="small" style="font-style: italic;">Posted: {{$post->startdatetime->toDayDateTimeString()}}</p>
+                <p class="small" style="font-style: italic;">Posted: {{$post->startdatetime->format('F dS Y')}}</p>
                 <p>{!!nl2br($post->body)!!}</p>
             </div>
             <div class="col-md-3">
