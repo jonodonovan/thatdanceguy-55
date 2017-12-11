@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
+    <link rel="stylesheet" href="/vendor/simplemde.min.css">
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 @endsection
 
@@ -10,16 +11,38 @@
 
 @section('content')
 <div class="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-transform:uppercase;">Editing {{$post->title}}</h1>
+        </div>
+    </div>
     <form method="POST" action="{{route('admin.post.update', $post->slug)}}" enctype="multipart/form-data">
     {{method_field('PATCH')}}
     {{csrf_field()}}
         <div class="row">
-            <h1 style="text-transform:uppercase;">Editing {{$post->title}}</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('Title') ? ' has-error' : ''}}">
                     <label for="title" class="control-label">Post Title</label>
                     <input id="title" type="text" class="form-control" name="title" value="{{$post->title or old('title')}}"  required autofocus>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
+                    <label for="intro" class="control-label">Intro</label>
+                    <input id="intro" type="text" class="form-control" name="intro" value="{{$post->intro or old('intro')}}" >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group {{$errors->has('body') ? ' has-error' : ''}}">
+                    <label for="body" class="control-label">Body</label>
+                    <textarea rows="10" id="body" class="form-control" name="body">{{$post->body or old('body')}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleSelect2">Tag</label>
 
@@ -37,30 +60,20 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
-                    <label for="intro" class="control-label">Intro</label>
-                    <input id="intro" type="text" class="form-control" name="intro" value="{{$post->intro or old('intro')}}" >
-                </div>
-                <div class="form-group {{$errors->has('body') ? ' has-error' : ''}}">
-                    <label for="body" class="control-label">Body</label>
-                    <textarea rows="10" id="body" class="form-control" name="body">{{$post->body or old('body')}}</textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row  m-b-40">
-            <div class="col-md-4">
                 <div class="form-group {{$errors->has('image') ? ' has-error' : ''}}">
                     <label for="image" class="control-label">Post Image Banner</label><br />
                     <input type="file" id="image" class="form-control" name="image"/>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="startdate" class="control-label">Post Add Date & Time</label>
                     <input id="startdatetime" type="text" class="form-control" name="startdatetime" value="{{$post->startdatetime or old('startdatetime')}}">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="enddatetime" class="control-label">Post Remove Date & Time</label>
                     <input id="enddatetime" type="text" class="form-control" name="enddatetime" value="{{$post->enddatetime or old('enddatetime')}}">
@@ -91,5 +104,10 @@
             enableTime: true,
             dateFormat: 'Y-m-d H:i:s'
         });
+    </script>
+
+    <script src="/vendor/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE();
     </script>
 @endsection
