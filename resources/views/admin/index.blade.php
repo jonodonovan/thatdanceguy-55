@@ -11,9 +11,9 @@
                 </div>
             @endif
             <a href="{{route('admin.tag.index')}}"><h2>Tags <a href="{{route('admin.tag.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
-            <a href="{{route('admin.post.index')}}"><h2>Posts <a href="{{route('admin.post.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
             <a href="{{route('admin.venue.index')}}"><h2>Venues <a href="{{route('admin.venue.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
             <a href="{{route('admin.event.index')}}"><h2>Events <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
+            <a href="{{route('admin.post.index')}}"><h2>Posts <a href="{{route('admin.post.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
             <a href="{{route('admin.partner.index')}}"><h2>Partners <a href="{{route('admin.partner.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
         </div>
     </div>

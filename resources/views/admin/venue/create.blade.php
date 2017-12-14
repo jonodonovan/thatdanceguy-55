@@ -2,10 +2,14 @@
 
 @section('content')
 <div class="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-transform:uppercase;">Create a new Venue</h1>
+        </div>
+    </div>
     <form method="POST" action="{{route('admin.venue.store')}}">
     {{csrf_field()}}
         <div class="row">
-            <h1 style="text-transform:uppercase;">Venue Creation</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Business Name</label>

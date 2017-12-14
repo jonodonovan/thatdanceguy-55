@@ -2,11 +2,15 @@
 
 @section('content')
 <div class="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-transform:uppercase;">Editing {{$venue->name}}</h1>
+        </div>
+    </div>
     <form method="POST" action="{{ route('admin.venue.update', $venue->slug) }}">
     {{ method_field('PATCH')}}
     {{ csrf_field() }}
         <div class="row">
-            <h1 style="text-transform:uppercase;">Venue Edit - {{$venue->name}}</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Business Name</label>
@@ -66,11 +70,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12 text-center">
-                    <a class="btn btn-default" href="{{route('admin.venue.index')}}">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Save Venue</button>
-                </div>
+            <div class="col-md-12 text-center">
+                <a class="btn btn-default" href="{{route('admin.venue.index')}}">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save Venue</button>
             </div>
         </div>
     </form>

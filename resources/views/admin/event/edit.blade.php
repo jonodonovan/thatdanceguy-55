@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
+    <link rel="stylesheet" href="/vendor/simplemde.min.css">
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 @endsection
 
@@ -10,16 +11,36 @@
 
 @section('content')
 <div class="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-transform:uppercase;">Editing {{$event->name}}</h1>
+        </div>
+    </div>
     <form method="POST" action="{{route('admin.event.update', $event->slug)}}" enctype="multipart/form-data">
     {{method_field('PATCH')}}
     {{csrf_field()}}
         <div class="row">
-            <h1 style="text-transform:uppercase;">Editing {{$event->title}}</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
                     <label for="name" class="control-label">Name</label>
                     <input id="name" type="text" class="form-control" name="name" value="{{$event->name or old('name')}}"  autofocus>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
+                    <label for="intro" class="control-label">Intro</label>
+                    <input id="intro" type="text" class="form-control" name="intro" value="{{$event->intro or old('intro')}}" >
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group {{$errors->has('description') ? ' has-error' : ''}}">
+                    <label for="description" class="control-label">Description</label>
+                    <textarea rows="10" id="description" class="form-control" name="description">{{$event->description or old('description')}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleSelect2">Tag</label>
                     <select multiple class="form-control" id="tagselect" name="tagselect[]">
@@ -34,6 +55,8 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleSelect2">Venue</label>
                     <select class="form-control" id="venue_id" name="venue_id">
@@ -43,18 +66,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
-                    <label for="intro" class="control-label">Intro</label>
-                    <input id="intro" type="text" class="form-control" name="intro" value="{{$event->intro or old('intro')}}" >
-                </div>
-                <div class="form-group {{$errors->has('description') ? ' has-error' : ''}}">
-                    <label for="description" class="control-label">Description</label>
-                    <textarea rows="10" id="description" class="form-control" name="description">{{$event->description or old('description')}}</textarea>
-                </div>
-            </div>
         </div>
-        <div class="row  m-b-40">
+        <div class="row">
             <div class="col-md-4">
                 <div class="form-group {{$errors->has('image') ? ' has-error' : ''}}">
                     <label for="image" class="control-label">Event Image Banner</label><br />
@@ -118,5 +131,9 @@
             enableTime: true,
             dateFormat: 'Y-m-d H:i:s'
         });
+    </script>
+    <script src="/vendor/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE();
     </script>
 @endsection

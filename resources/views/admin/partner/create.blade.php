@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <a class="btn btn-default" href="{{route('admin.partner.index')}}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Create Partner</button>
             </div>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
+    <link rel="stylesheet" href="/vendor/simplemde.min.css">
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 @endsection
 
@@ -19,6 +20,24 @@
                     <label for="name" class="control-label">Name</label>
                     <input id="name" type="text" class="form-control" name="name" value="{{old('name')}}"  autofocus>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
+                    <label for="intro" class="control-label">Intro</label>
+                    <input id="intro" type="text" class="form-control" name="intro" value="{{old('intro')}}" >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group {{$errors->has('description') ? ' has-error' : ''}}">
+                    <label for="description" class="control-label">Description</label>
+                    <textarea rows="10" id="description" class="form-control" name="description">{{old('description')}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleSelect2">Tag</label>
                     <select multiple class="form-control" id="tagselect" name="tagselect[]">
@@ -27,6 +46,8 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleSelect2">Venue</label>
                     <select class="form-control" id="venue_id" name="venue_id">
@@ -34,16 +55,6 @@
                             <option value="{{$venue->id}}">{{$venue->name}}</option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
-                    <label for="intro" class="control-label">Intro</label>
-                    <input id="intro" type="text" class="form-control" name="intro" value="{{old('intro')}}" >
-                </div>
-                <div class="form-group {{$errors->has('description') ? ' has-error' : ''}}">
-                    <label for="description" class="control-label">Description</label>
-                    <textarea rows="10" id="description" class="form-control" name="description">{{old('description')}}</textarea>
                 </div>
             </div>
         </div>
@@ -111,5 +122,9 @@
             enableTime: true,
             dateFormat: 'Y-m-d H:i:s'
         });
+    </script>
+    <script src="/vendor/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE();
     </script>
 @endsection
