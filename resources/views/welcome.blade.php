@@ -38,7 +38,7 @@
                         <div class="caption" style="text-align:left;">
                             <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$event->name}}</h3>
                             <small style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</small>
-                            <small>From {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</small>
+                            <small>from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</small>
                             <p>{{$event->intro}}</p>
 
 

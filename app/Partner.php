@@ -15,4 +15,13 @@ class Partner extends Model
     * @var array
     */
     protected $dates = ['deleted_at'];
+
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+    protected $fillable = [
+        'name', 'slug', 'website', 'intro', 'phone', 'email', 'specialty',
+    ];
 }

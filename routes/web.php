@@ -14,6 +14,9 @@ Route::get('tags/{slug}', 'TagController@publicshow')->name('tags.show');
 Route::get('venues', 'VenueController@public')->name('venues');
 Route::get('venues/{slug}', 'VenueController@publicshow')->name('venues.show');
 
+Route::get('partners', 'PartnerController@public')->name('partners');
+Route::get('partners/{slug}', 'PartnerController@publicshow')->name('partners.show');
+
 Route::prefix('admin')->group(function () {
     Route::group(['as' => 'admin.'], function () {
     Route::resource('post', 'PostController');

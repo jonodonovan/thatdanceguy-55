@@ -34,7 +34,7 @@
                 <li><a href="{{route('events')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> View all Upcoming Events</a></li>
                 <li><a href="{{route('venues')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Search by Venue</a></li>
                 <li><a href="{{route('posts')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Read Posts</a></li>
-                <li><a href="{{route('venues')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Our Partners</a></li>
+                <li><a href="{{route('partners')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Our Partners</a></li>
                 <li><a href="{{route('venues')}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Hire Me</a></li>
             </ul>
 
@@ -55,6 +55,7 @@
                             <li><a href="{{route('admin.venue.index')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Venues</a></li>
                             <li><a href="{{route('admin.event.index')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Events</a></li>
                             <li><a href="{{route('admin.post.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a></li>
+                            <li><a href="{{route('admin.partner.index')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Partners</a></li>
                             <li>
                                 <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 
