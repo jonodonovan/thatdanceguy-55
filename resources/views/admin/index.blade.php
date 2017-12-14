@@ -15,6 +15,7 @@
             <a href="{{route('admin.event.index')}}"><h2>Events <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
             <a href="{{route('admin.post.index')}}"><h2>Posts <a href="{{route('admin.post.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
             <a href="{{route('admin.partner.index')}}"><h2>Partners <a href="{{route('admin.partner.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h2></a>
+            <a href="{{route('admin.contact.index')}}"><h2>Contacts</h2></a>
         </div>
     </div>
 </div>

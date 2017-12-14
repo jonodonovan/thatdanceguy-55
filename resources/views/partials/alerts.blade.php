@@ -1,4 +1,4 @@
-<div class="container">
+
     <div class="row">
         <div class="col-md-12">
             @if (Session::has('success'))
@@ -40,4 +40,3 @@
 
         </div>
     </div>
-</div>
