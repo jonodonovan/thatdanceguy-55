@@ -20,7 +20,7 @@ Route::get('partners', 'PartnerController@public')->name('partners');
 Route::get('partners/{slug}', 'PartnerController@publicshow')->name('partners.show');
 
 Route::prefix('admin')->group(function () {
-    Route::group(['as' => 'admin.'], function () {
+    Route::group(['as' => 'admin.', 'middleware' => ['admin']], function () {
         Route::resource('post', 'PostController');
         Route::resource('tag', 'TagController');
         Route::resource('event', 'EventController');
@@ -32,4 +32,6 @@ Route::prefix('admin')->group(function () {
 
 Auth::routes();
 
-Route::get('admin', 'HomeController@index')->name('admin');
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('admin', 'HomeController@index')->name('admin');
+});

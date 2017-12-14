@@ -50,13 +50,15 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('admin')}}"><i class="fa fa-home" aria-hidden="true"></i> Admin Home</a></li>
-                            <li><a href="{{route('admin.tag.index')}}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
-                            <li><a href="{{route('admin.venue.index')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Venues</a></li>
-                            <li><a href="{{route('admin.event.index')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Events</a></li>
-                            <li><a href="{{route('admin.post.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a></li>
-                            <li><a href="{{route('admin.partner.index')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Partners</a></li>
-                            <li><a href="{{route('admin.contact.index')}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Conact Submissions</a></li>
+                            @if (auth()->user()->isAdmin)
+                                <li><a href="{{route('admin')}}"><i class="fa fa-home" aria-hidden="true"></i> Admin Home</a></li>
+                                <li><a href="{{route('admin.tag.index')}}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
+                                <li><a href="{{route('admin.venue.index')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Venues</a></li>
+                                <li><a href="{{route('admin.event.index')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Events</a></li>
+                                <li><a href="{{route('admin.post.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a></li>
+                                <li><a href="{{route('admin.partner.index')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Partners</a></li>
+                                <li><a href="{{route('admin.contact.index')}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Conact Submissions</a></li>
+                            @endif
                             <li>
                                 <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 

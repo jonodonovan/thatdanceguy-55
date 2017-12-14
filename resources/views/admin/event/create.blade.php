@@ -11,6 +11,7 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <form method="POST" action="{{route('admin.event.store')}}" enctype="multipart/form-data">
     {{csrf_field()}}
         <div class="row">

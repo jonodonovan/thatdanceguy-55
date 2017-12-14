@@ -2,19 +2,20 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <div class="row">
         <div class="col-md-12">
-            <h2>All Events</h2>
+            <h1>Admin - All Events</h1>
             <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width:5%">#</th>
                         <th style="width:10%">Name</th>
                         <th style="width:20%">Start</th>
                         <th style="width:20%">End</th>
                         <th style="width:30%">Intro</th>
-                        <th>Action</th>
+                        <th style="width:10%">Action</th>
                     </tr>
                 </thead>
                 <tbody>

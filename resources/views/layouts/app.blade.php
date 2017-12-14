@@ -26,7 +26,6 @@
                 @include('partials.nav_public')
             </div>
             <div class="col-sm-9 col-lg-10">
-                @include('partials.alerts')
                 @yield('content')
             </div>
         </div>

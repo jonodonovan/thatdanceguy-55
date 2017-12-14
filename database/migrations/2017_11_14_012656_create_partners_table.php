@@ -17,11 +17,11 @@ class CreatePartnersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('phone');
-            $table->string('email');
-            $table->string('website');
-            $table->string('specialty');
-            $table->text('intro');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('specialty')->nullable();
+            $table->text('intro')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

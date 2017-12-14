@@ -4,13 +4,13 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>All Contacts</h2>
+            <h1>Admin - All Contacts</h1>
             <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
+                        <th style="width:5%">#</th>
+                        <th style="width:10%">Name</th>
                         <th>Company</th>
                         <th>Email</th>
                         <th>Phone</th>

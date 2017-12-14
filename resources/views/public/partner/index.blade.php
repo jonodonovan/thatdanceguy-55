@@ -4,7 +4,7 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2 style="margin-bottom:50px;">Partners</h2>
+            <h1>Our Partners</h1>
         </div>
     </div>
     <div class="row">

@@ -2,9 +2,10 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <div class="row">
         <div class="col-md-12">
-            <h2>All Partners</h2>
+            <h1>Admin - All Partners</h1>
             <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.partner.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>

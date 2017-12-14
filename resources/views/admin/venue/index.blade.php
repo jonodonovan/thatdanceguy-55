@@ -2,15 +2,16 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <div class="row">
         <div class="col-md-12">
-            <h2>All Venues</h2>
-            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.venue.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
+            <h1>Admin - All Venues</h1>
+            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.venue.create')}}">sdf<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th style="width:5%">#</th>
-                        <th>Name</th>
+                        <th style="width:10%">Name</th>
                         <th style="width:20%">Address</th>
                         <th style="width:20%">City</th>
                         <th style="width:20%">Phone</th>

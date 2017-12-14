@@ -2,15 +2,16 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <div class="row">
         <div class="col-md-12">
-            <h2>All Posts</h2>
+            <h1>Admin - All Posts</h1>
             <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.post.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th style="width:20%">Title</th>
+                        <th style="width:5%">#</th>
+                        <th style="width:10%">Title</th>
                         <th style="width:20%">Intro</th>
                         <th style="width:50%">Body</th>
                         <th style="width:10%">Action</th>

@@ -6,6 +6,7 @@
 
 @section('content')
 <div class="page-wrapper">
+    @include('partials.alerts')
     <div class="row">
         <div class="col-md-12">
             <h1 style="text-transform:uppercase;">Create a new Tag</h1>

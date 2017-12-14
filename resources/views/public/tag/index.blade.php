@@ -4,7 +4,11 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>All Tags</h2>
+            <h1>All Tags</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <table class="table table-hover">
                 <thead>
                     <tr>
