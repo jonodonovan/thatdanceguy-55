@@ -6,7 +6,7 @@
                     <!-- Branding Image -->
                     <div class="">
                         <a href="{{url('/')}}">
-                            <h1 class="visible-xs" style="color:white;">That Dance Guy</h1>
+                            <h1 class="visible-xs" style="color:white;"><img src="/theme/logo_50.png" style=""> That Dance Guy</h1>
                             <img class="hidden-xs" src="/theme/logo.png" style="margin:10px auto 15px auto;">
                         </a>
                         <div style="font-size:18px;color:white;">Find upcoming swing dance events in the greater Tampa Bay area.</div>
