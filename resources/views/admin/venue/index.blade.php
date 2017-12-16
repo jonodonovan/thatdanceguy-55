@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Admin - All Venues</h1>
-            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.venue.create')}}">sdf<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
+            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.venue.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
             <table class="table table-hover">
                 <thead>
                     <tr>

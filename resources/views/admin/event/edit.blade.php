@@ -68,23 +68,55 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group {{$errors->has('image') ? ' has-error' : ''}}">
                     <label for="image" class="control-label">Event Image Banner</label><br />
                     <input type="file" id="image" class="form-control" name="image"/>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
+                @if ($event->image)
+                    <img src="/images/{{$event->image}}" class="img-responsive" alt="Responsive image">
+                @else
+                    <br>
+                    <p>No image</p>
+                @endif
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="startdate" class="control-label">Start Date & Time</label>
                     <input id="startdatetime" type="text" class="form-control" name="startdatetime" value="{{$event->startdatetime or old('startdatetime')}}">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="enddatetime" class="control-label">End Date & Time</label>
                     <input id="enddatetime" type="text" class="form-control" name="enddatetime" value="{{$event->enddatetime or old('enddatetime')}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group {{$errors->has('address') ? ' has-error' : ''}}">
+                    <label for="address" class="control-label">Address (Street)</label>
+                    <input id="address" type="text" class="form-control" name="address" value="{{$event->address or old('address')}}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group {{$errors->has('city') ? ' has-error' : ''}}">
+                    <label for="city" class="control-label">City</label>
+                    <input id="city" type="text" class="form-control" name="city" value="{{$event->city or old('city')}}">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group {{$errors->has('zip') ? ' has-error' : ''}}">
+                    <label for="zip" class="control-label">Zip</label>
+                    <input id="zip" type="text" class="form-control" name="zip" value="{{$event->zip or old('zip')}}">
                 </div>
             </div>
         </div>

@@ -80,6 +80,26 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group {{$errors->has('address') ? ' has-error' : ''}}">
+                    <label for="address" class="control-label">Address (Street)</label>
+                    <input id="address" type="text" class="form-control" name="address" value="{{old('address')}}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group {{$errors->has('city') ? ' has-error' : ''}}">
+                    <label for="city" class="control-label">City</label>
+                    <input id="city" type="text" class="form-control" name="city" value="{{old('city')}}">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group {{$errors->has('zip') ? ' has-error' : ''}}">
+                    <label for="zip" class="control-label">Zip</label>
+                    <input id="zip" type="text" class="form-control" name="zip" value="{{old('zip')}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="form-group {{$errors->has('facebook') ? ' has-error' : ''}}">
                     <label for="facebook" class="control-label">Facebook Event Link</label>
@@ -114,11 +134,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script type="text/javascript">
         flatpickr("#startdatetime", {
+            defaultDate: 'today',
             altInput: true,
             enableTime: true,
             dateFormat: 'Y-m-d H:i:s'
         });
         flatpickr("#enddatetime", {
+            defaultDate: 'today',
             altInput: true,
             enableTime: true,
             dateFormat: 'Y-m-d H:i:s'

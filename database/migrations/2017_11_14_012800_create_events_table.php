@@ -27,6 +27,9 @@ class CreateEventsTable extends Migration
             $table->string('lng')->nullable();
             $table->integer('venue_id')->unsigned();
             $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -103,6 +103,9 @@ class EventController extends Controller
             'facebook' => '',
             'lat' => '',
             'lng' => '',
+            'address' => '',
+            'city' => '',
+            'zip' => '',
             'venue_id' => 'integer',
         ));
 
@@ -124,11 +127,28 @@ class EventController extends Controller
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
 
-        if (! $request->lat) {
+        if (! $request->lat || $request->lng || $request->address || $request->city || $request->zip) {
             $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
 
-            $event->lat = $venue->lat;
-            $event->lng = $venue->lng;
+            if (! $request->lat) {
+                $event->lat = $venue->lat;
+            }
+
+            if (! $request->lat) {
+                $event->lng = $venue->lng;
+            }
+
+            if (! $request->address) {
+                $event->address = $venue->address;
+            }
+
+            if (! $request->city) {
+                $event->city = $venue->city;
+            }
+
+            if (! $request->zip) {
+                $event->zip = $venue->zip;
+            }
         }
 
         if ($request->image)
@@ -214,20 +234,39 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->intro = $request->intro;
         $event->description = $request->description;
-        $event->image = $request->image;
         $event->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
+        $event->address = $request->address;
+        $event->city = $request->city;
+        $event->zip = $request->zip;
 
-        if (! $request->lat) {
+        if (! $request->lat || $request->lng || $request->address || $request->city || $request->zip) {
             $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
 
-            $event->lat = $venue->lat;
-            $event->lng = $venue->lng;
+            if (! $request->lat) {
+                $event->lat = $venue->lat;
+            }
+
+            if (! $request->lat) {
+                $event->lng = $venue->lng;
+            }
+
+            if (! $request->address) {
+                $event->address = $venue->address;
+            }
+
+            if (! $request->city) {
+                $event->city = $venue->city;
+            }
+
+            if (! $request->zip) {
+                $event->zip = $venue->zip;
+            }
         }
 
-        if ($request->image)
+        if ($request->image != NULL)
         {
             $imagename = time().'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('images'), $imagename);

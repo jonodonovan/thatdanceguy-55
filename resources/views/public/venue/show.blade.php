@@ -11,7 +11,7 @@
                     </a>
                 @endif
             </h1>
-            <p>{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}} | {{$venue->phone}}</p>
+            <p><a href="https://www.google.com/maps/place/{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}}" target="_blank">{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}} <i class="fa fa-map-marker" aria-hidden="true"></i></a> | {{$venue->phone}}</p>
         </div>
     </div>
     <div class="row">
