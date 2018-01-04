@@ -238,32 +238,37 @@ class EventController extends Controller
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
-        $event->address = $request->address;
-        $event->city = $request->city;
-        $event->zip = $request->zip;
 
-        if (! $request->lat || $request->lng || $request->address || $request->city || $request->zip) {
-            $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
+        $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
 
-            if (! $request->lat) {
-                $event->lat = $venue->lat;
-            }
+        if ($request->lat == NULL) {
+            $event->lat = $venue->lat;
+        } else {
+            $event->lat = $request->lat;
+        }
 
-            if (! $request->lat) {
-                $event->lng = $venue->lng;
-            }
+        if ($request->lng == NULL) {
+            $event->lng = $venue->lng;
+        } else {
+            $event->lng = $request->lng;
+        }
 
-            if (! $request->address) {
-                $event->address = $venue->address;
-            }
+        if ($request->address == NULL) {
+            $event->address = $venue->address;
+        } else {
+            $event->address = $request->address;
+        }
 
-            if (! $request->city) {
-                $event->city = $venue->city;
-            }
+        if ($request->city == NULL) {
+            $event->city = $venue->city;
+        } else {
+            $event->city = $request->city;
+        }
 
-            if (! $request->zip) {
-                $event->zip = $venue->zip;
-            }
+        if ($request->zip == NULL) {
+            $event->zip = $venue->zip;
+        } else {
+            $event->zip = $request->zip;
         }
 
         if ($request->image != NULL)
