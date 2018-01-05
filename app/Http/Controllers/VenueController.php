@@ -28,8 +28,8 @@ class VenueController extends Controller
     public function public()
     {
         $venues = Venue::orderBy('name')->get();
-
-        return view('public.venue.index')->withVenues($venues);
+        $today = Carbon::today()->toDateTimeString();
+        return view('public.venue.index')->withVenues($venues)->withToday($today);
     }
 
     /**

@@ -15,7 +15,7 @@
                     <div class="thumbnail" style="border: 2px solid #000000;">
                         <div class="caption" style="">
                             <h3 style="font-weight:bold;">{{$venue->name}}</h3>
-                            <p>Upcoming Events: <span class="label @if($venue->events->count() >= 1) label-success @else label-default @endif">{{$venue->events->count()}}</span></p>
+                            <p>Upcoming Events: <span class="label @if($venue->events->count() >= 1) label-success @else label-default @endif">{{$venue->events->where('startdatetime', '>', $today)->count()}}</span></p>
                         </div>
                     </div>
                     </a>
