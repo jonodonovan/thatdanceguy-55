@@ -33,6 +33,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <meta property="og:image" content="https://thatdanceguy.com/theme/Logo_white_320x320.png">
+    <meta property="og:title" content="That Dance Guy">
+    <meta property="og:description" content="Find upcoming swing dance events in the greater Tampa Bay area.">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="320">
     <meta property="og:image:height" content="320">
