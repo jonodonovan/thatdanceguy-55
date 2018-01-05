@@ -97,7 +97,7 @@
                 lng: value.lng,
                 title: value.name,
                 infoWindow: {
-                    content: '<h1>'+value.name+'</h1><br /><a href="/events/'+value.slug+'">'+value.slug+'</a>'
+                    content: '<h1 style="text-transform:uppercase;font-weight:bold;"><a href="/events/'+value.slug+'">'+value.name+'</a></h1><p style="font-style: italic;">'+value.intro+'</p>'
                 }
             });
         });

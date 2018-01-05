@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="row">
-        @foreach ($venue->events as $event)
+        @foreach ($upcomingevents as $event)
             <div class="col-md-3">
                 <div class="all-events">
                     <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">

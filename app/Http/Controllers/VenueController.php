@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Venue;
+use App\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 
@@ -37,9 +39,10 @@ class VenueController extends Controller
      */
     public function publicshow($slug)
     {
+        $today = Carbon::today()->toDateTimeString();
         $venue = Venue::where('slug', '=', $slug)->firstOrFail();
-
-        return view('public.venue.show')->withVenue($venue);
+        $upcomingevents = Event::where('venue_id', '=', $venue->id)->where('startdatetime', '>', $today)->orderBy('startdatetime')->get();
+        return view('public.venue.show')->withVenue($venue)->withUpcomingevents($upcomingevents);
     }
 
     /**

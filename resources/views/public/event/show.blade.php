@@ -4,7 +4,9 @@
 <div class="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <img src="/images/{{$event->image}}" class="img-responsive" alt="Responsive image">
+            @if ($event->image)
+                <img src="/images/{{$event->image}}" class="img-responsive" alt="Responsive image">
+            @endif
             <h1 style="text-transform:uppercase;font-weight:bold;">{{$event->name}}</h1>
             <p style="text-transform:uppercase;font-weight:bold;">{{$event->startdatetime->format('F dS')}} from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</p>
             <p>Location: <a href="https://www.google.com/maps/place/{{$event->address}} {{$event->city}}, FL {{$event->zip}}" target="_blank">{{$event->address}} {{$event->city}}, FL {{$event->zip}} <i class="fa fa-map-marker" aria-hidden="true"></i></a></p>

@@ -14,7 +14,7 @@ class WelcomeController extends Controller
         $today = Carbon::today()->toDateTimeString();
 
         $posts = Post::orderBy('title')->get();
-        $events = Event::where('startdatetime', '>', $today)->orderBy('id')->get();
+        $events = Event::where('startdatetime', '>', $today)->orderBy('startdatetime')->get();
         $upcomingevents = Event::where('startdatetime', '>', $today)->orderBy('startdatetime')->get();
 
         return view('welcome')->withPosts($posts)->withEvents($events)->withUpcomingevents($upcomingevents);
