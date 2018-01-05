@@ -40,8 +40,6 @@
                             <small style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</small>
                             <small>from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</small>
                             <p>{{$event->intro}}</p>
-
-
                         </div>
                     </div>
                     </a>
@@ -50,29 +48,31 @@
         @endforeach
     </div>
 
-    <div class="row" style="padding:15px;">
-        <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
-            <h3 style="color:white;text-transform:uppercase;">Latest Posts</h3>
+    @if (! $posts->isEmpty())
+        <div class="row" style="padding:15px;">
+            <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
+                <h3 style="color:white;text-transform:uppercase;">Latest Posts</h3>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        @foreach ($posts as $post)
-            <div class="col-md-3" style="padding:0 5px;">
-                <div class="thumbnail">
-                    @if ($post->image)
-                        <img src="{{url('images/'.$post->image)}}" class="" alt="{{$post->title}} image">
-                    @endif
-                    <div class="caption">
-                        <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$post->title}}</h3>
-                        <p>{{$post->intro}}</p>
-                        <p>
-                            <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
-                        </p>
+        <div class="row">
+            @foreach ($posts as $post)
+                <div class="col-md-3" style="padding:0 5px;">
+                    <div class="thumbnail">
+                        @if ($post->image)
+                            <img src="{{url('images/'.$post->image)}}" class="" alt="{{$post->title}} image">
+                        @endif
+                        <div class="caption">
+                            <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$post->title}}</h3>
+                            <p>{{$post->intro}}</p>
+                            <p>
+                                <a href="{{url('posts/'.$post->slug)}}" class="btn btn-primary" role="button">Read More</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @endif
 @endsection
 
 @section('script_footer')

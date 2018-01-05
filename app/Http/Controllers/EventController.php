@@ -68,8 +68,9 @@ class EventController extends Controller
     {
         $events = Event::orderBy('name')->get();
         $tags = Tag::all()->unique('title');
+        $venues = Venue::all();
 
-        return view('admin.event.index')->withEvents($events)->withTags($tags);
+        return view('admin.event.index')->withEvents($events)->withTags($tags)->withVenues($venues);
     }
 
     /**
@@ -106,7 +107,7 @@ class EventController extends Controller
             'address' => '',
             'city' => '',
             'zip' => '',
-            'venue_id' => 'integer',
+            'venue_id' => 'required|integer',
         ));
 
         $event = new Event;
@@ -127,28 +128,36 @@ class EventController extends Controller
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
 
-        if (! $request->lat || $request->lng || $request->address || $request->city || $request->zip) {
-            $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
+        $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
 
-            if (! $request->lat) {
-                $event->lat = $venue->lat;
-            }
+        if ($request->lat == NULL) {
+            $event->lat = $venue->lat;
+        } else {
+            $event->lat = $request->lat;
+        }
 
-            if (! $request->lat) {
-                $event->lng = $venue->lng;
-            }
+        if ($request->lng == NULL) {
+            $event->lng = $venue->lng;
+        } else {
+            $event->lng = $request->lng;
+        }
 
-            if (! $request->address) {
-                $event->address = $venue->address;
-            }
+        if ($request->address == NULL) {
+            $event->address = $venue->address;
+        } else {
+            $event->address = $request->address;
+        }
 
-            if (! $request->city) {
-                $event->city = $venue->city;
-            }
+        if ($request->city == NULL) {
+            $event->city = $venue->city;
+        } else {
+            $event->city = $request->city;
+        }
 
-            if (! $request->zip) {
-                $event->zip = $venue->zip;
-            }
+        if ($request->zip == NULL) {
+            $event->zip = $venue->zip;
+        } else {
+            $event->zip = $request->zip;
         }
 
         if ($request->image)

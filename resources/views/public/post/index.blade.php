@@ -8,6 +8,11 @@
         </div>
     </div>
     <div class="row">
+        @if ($posts->isEmpty())
+            <div class="col-md-12">
+                <p>No posts added.</p>
+            </div>
+        @endif
         @foreach ($posts as $post)
             <div class="col-md-3">
                 <div class="thumbnail">

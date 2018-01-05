@@ -6,7 +6,13 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Admin - All Events</h1>
-            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a> <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a></div>
+            <div class="pull-right"><a href="{{route('admin')}}"><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+                @if ($venues->isEmpty())
+                    <a href="{{route('admin.venue.create')}}">Add venue first</a>
+                @else
+                    <a href="{{route('admin.event.create')}}"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+                @endif
+                </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
