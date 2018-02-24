@@ -30,6 +30,9 @@ class CreateEventsTable extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
+            $table->integer('presale')->unsigned()->nullable();
+            $table->integer('sale')->unsigned()->nullable();
+            $table->integer('price')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

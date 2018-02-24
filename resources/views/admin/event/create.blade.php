@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('address') ? ' has-error' : ''}}">
-                    <label for="address" class="control-label">Address (Street)</label>
+                    <label for="address" class="control-label">Address <em>(Street)</em></label>
                     <input id="address" type="text" class="form-control" name="address" value="{{old('address')}}">
                 </div>
             </div>
@@ -119,8 +119,63 @@
                 </div>
             </div>
         </div>
+        <div style="background-color:#EEEEEE;margin-bottom:50px;padding:10px;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group {{$errors->has('presale') ? ' has-error' : ''}}">
+                        <label for="presale" class="control-label">Presale Ticket Price <em>(in cents)</em></label>
+                        <input id="presale" type="text" class="form-control" name="presale" value="{{old('presale')}}" >
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="startdate" class="control-label">Presale Start Date & Time</label>
+                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="startdate" class="control-label">Presale End Date & Time</label>
+                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group {{$errors->has('presalenote') ? ' has-error' : ''}}">
+                        <label for="presalenote" class="control-label">Presale Note</label>
+                        <input id="presalenote" type="text" class="form-control" name="presalenote" value="{{old('presalenote')}}" >
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group {{$errors->has('normalticketprice') ? ' has-error' : ''}}">
+                        <label for="normalticketprice" class="control-label">Normal Ticket Pice <em>(in cents)</em></label>
+                        <input id="normalticketprice" type="text" class="form-control" name="normalticketprice" value="{{old('normalticketprice')}}" >
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="startdate" class="control-label">Sale Start Date & Time</label>
+                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="startdate" class="control-label">Sale End Date & Time</label>
+                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group {{$errors->has('salenote') ? ' has-error' : ''}}">
+                        <label for="salenote" class="control-label">Sale Note</label>
+                        <input id="salenote" type="text" class="form-control" name="salenote" value="{{old('salenote')}}" >
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-right">
                 <a class="btn btn-default" href="{{route('admin.event.index')}}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Create Event</button>
             </div>
