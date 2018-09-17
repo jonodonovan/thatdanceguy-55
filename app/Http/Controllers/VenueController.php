@@ -39,10 +39,10 @@ class VenueController extends Controller
      */
     public function publicshow($slug)
     {
-        $today = Carbon::today()->toDateTimeString();
+        $today = Carbon::now();
         $venue = Venue::where('slug', '=', $slug)->firstOrFail();
         $upcomingevents = Event::where('venue_id', '=', $venue->id)->where('startdatetime', '>', $today)->orderBy('startdatetime')->get();
-        return view('public.venue.show')->withVenue($venue)->withUpcomingevents($upcomingevents);
+        return view('public.venue.show')->withVenue($venue)->withUpcomingevents($upcomingevents)->withToday($today);
     }
 
     /**
@@ -82,8 +82,6 @@ class VenueController extends Controller
             'city' => 'required',
             'zip' => '',
             'facebook' => '',
-            'lat' => '',
-            'lng' => '',
         ));
 
         $venue = new Venue;
@@ -101,8 +99,6 @@ class VenueController extends Controller
         $venue->city = $request->city;
         $venue->zip = $request->zip;
         $venue->facebook = $request->facebook;
-        $venue->lat = $request->lat;
-        $venue->lng = $request->lng;
 
         $venue->save();
 
@@ -156,8 +152,6 @@ class VenueController extends Controller
             'city' => 'required',
             'zip' => '',
             'facebook' => '',
-            'lat' => '',
-            'lng' => '',
         ));
 
         $venue->slug = $request->name;
@@ -173,8 +167,6 @@ class VenueController extends Controller
         $venue->city = $request->city;
         $venue->zip = $request->zip;
         $venue->facebook = $request->facebook;
-        $venue->lat = $request->lat;
-        $venue->lng = $request->lng;
 
         $venue->save();
 

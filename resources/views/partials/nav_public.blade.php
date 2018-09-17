@@ -7,7 +7,7 @@
                     <div class="">
                         <a href="{{url('/')}}">
                             <h1 class="visible-xs" style="color:white;"> That Dance Guy</h1>
-                            <img class="hidden-xs" src="/theme/logo.png" style="margin:10px auto 15px auto;">
+                            <img class="hidden-xs" src="/theme/Logo_white.svg" style="margin:10px auto 15px auto;">
                         </a>
                         <div style="font-size:18px;color:white;">Find upcoming swing dance events in the greater Tampa Bay area.</div>
                     </div>
@@ -22,16 +22,11 @@
                     </button>
                 </div>
             </div>
-
-
-
-
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{route('events')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> View all Upcoming Events</a></li>
                 <li><a href="{{route('venues')}}"><i class="fa fa-building-o" aria-hidden="true"></i> Search by Venue</a></li>
                 <li><a href="{{route('posts')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Read Posts</a></li>
                 <li><a href="{{route('partners')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Our Partners</a></li>
@@ -58,6 +53,7 @@
                                 <li><a href="{{route('admin.post.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a></li>
                                 <li><a href="{{route('admin.partner.index')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> Partners</a></li>
                                 <li><a href="{{route('admin.contact.index')}}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Conact Submissions</a></li>
+                                <li><a href="{{route('admin.ticket.index')}}"><i class="fa fa-ticket" aria-hidden="true"></i> Ticket Sales</a></li>
                             @endif
                             <li>
                                 <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>

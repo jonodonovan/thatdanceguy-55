@@ -27,10 +27,21 @@
                         <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
                         <div class="thumbnail" style="border: 2px solid #000000;">
                             <div class="caption" style="">
-                                <h3 style="font-weight:bold;">{{$event->name}}</h3>
+                                <h3 style="font-weight:bold;">{{$event->name}}
+                                    @if($event->presaleend > $today)
+                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
+                                    @else
+                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                    @endif
+                                </h3>
+                                <p style="padding:10px 0;"><span style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</span> 
+                                from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</p>
                                 <p>{{$event->intro}}</p>
-                                <p style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</p>
-                                <p>{{$event->startdatetime->format('ga')}} - {{$event->enddatetime->format('ga')}}</p>
+                                @if ($event->address)
+                                    <p style="padding-top:10px;">Location: <a href="/venues/{{$event->venue->slug}}">{{$event->venue->name}}</a> in <a href="https://www.google.com/maps/place/{{$event->address}} {{$event->city}}, FL {{$event->zip}}" target="_blank">{{$event->city}}</a></p>
+                                @else
+                                    <p style="padding-top:10px;">Location: <a href="/venues/{{$event->venue->slug}}">{{$event->venue->name}}</a> in <a href="https://www.google.com/maps/place/{{$event->venue->address}} {{$event->venue->city}}, FL {{$event->venue->zip}}" target="_blank">{{$event->venue->city}}</a></p>
+                                @endif
                             </div>
                         </div>
                         </a>

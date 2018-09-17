@@ -18,13 +18,13 @@
             <h1 style="text-transform:uppercase;">Create a new event</h1>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('name') ? ' has-error' : ''}}">
-                    <label for="name" class="control-label">Name</label>
+                    <label for="name" class="control-label">Event Name</label>
                     <input id="name" type="text" class="form-control" name="name" value="{{old('name')}}"  autofocus>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('intro') ? ' has-error' : ''}}">
-                    <label for="intro" class="control-label">Intro</label>
+                    <label for="intro" class="control-label">Event Intro</label>
                     <input id="intro" type="text" class="form-control" name="intro" value="{{old('intro')}}" >
                 </div>
             </div>
@@ -32,30 +32,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group {{$errors->has('description') ? ' has-error' : ''}}">
-                    <label for="description" class="control-label">Description</label>
+                    <label for="description" class="control-label">Event Description</label>
                     <textarea rows="10" id="description" class="form-control" name="description">{{old('description')}}</textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleSelect2">Tag</label>
-                    <select multiple class="form-control" id="tagselect" name="tagselect[]">
-                        @foreach ($tags as $tag)
-                            <option value="{{$tag->id}}">{{$tag->title}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleSelect2">Venue</label>
-                    <select class="form-control" id="venue_id" name="venue_id">
-                        @foreach ($venues as $venue)
-                            <option value="{{$venue->id}}">{{$venue->name}}</option>
-                        @endforeach
-                    </select>
                 </div>
             </div>
         </div>
@@ -68,7 +46,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="startdate" class="control-label">Start Date & Time</label>
+                    <label for="startdatetime" class="control-label">Start Date & Time</label>
                     <input id="startdatetime" type="text" class="form-control" name="startdatetime">
                 </div>
             </div>
@@ -81,62 +59,83 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group {{$errors->has('address') ? ' has-error' : ''}}">
-                    <label for="address" class="control-label">Address <em>(Street)</em></label>
-                    <input id="address" type="text" class="form-control" name="address" value="{{old('address')}}">
+                <div class="form-group">
+                    <label for="tagselect">Tag</label>
+                    <select multiple class="form-control" id="tagselect" name="tagselect[]">
+                        @foreach ($tags as $tag)
+                            <option value="{{$tag->id}}">{{$tag->title}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group {{$errors->has('city') ? ' has-error' : ''}}">
-                    <label for="city" class="control-label">City</label>
-                    <input id="city" type="text" class="form-control" name="city" value="{{old('city')}}">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group {{$errors->has('zip') ? ' has-error' : ''}}">
-                    <label for="zip" class="control-label">Zip</label>
-                    <input id="zip" type="text" class="form-control" name="zip" value="{{old('zip')}}">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group {{$errors->has('facebook') ? ' has-error' : ''}}">
                     <label for="facebook" class="control-label">Facebook Event Link</label>
-                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{old('facebook')}}" >
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group {{$errors->has('lat') ? ' has-error' : ''}}">
-                    <label for="lat" class="control-label">Latitude</label>
-                    <input id="lat" type="text" class="form-control" name="lat" value="{{old('lat')}}" >
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group {{$errors->has('lng') ? ' has-error' : ''}}">
-                    <label for="lng" class="control-label">Longitude</label>
-                    <input id="lng" type="text" class="form-control" name="lng" value="{{old('lng')}}" >
+                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{old('facebook', 'https://www.facebook.com/pages/...')}}" >
                 </div>
             </div>
         </div>
-        <div style="background-color:#EEEEEE;margin-bottom:50px;padding:10px;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);">
+        <div style="background-color:#B2EBF2;margin-bottom:10px;padding:10px;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Venue Info - <small>Leave address blank if same as selected venue</small></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="venue_id">Venue</label>
+                        <select class="form-control" id="venue_id" name="venue_id">
+                            <option value="">Select</option>
+                            @foreach ($venues as $venue)
+                                <option value="{{$venue->id}}">{{$venue->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group {{$errors->has('address') ? ' has-error' : ''}}">
+                        <label for="address" class="control-label">Address <em>(Street)</em></label>
+                        <input id="address" type="text" class="form-control" name="address" value="{{old('address')}}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group {{$errors->has('city') ? ' has-error' : ''}}">
+                        <label for="city" class="control-label">City</label>
+                        <input id="city" type="text" class="form-control" name="city" value="{{old('city')}}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group {{$errors->has('zip') ? ' has-error' : ''}}">
+                        <label for="zip" class="control-label">Zip</label>
+                        <input id="zip" type="text" class="form-control" name="zip" value="{{old('zip')}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color:#BBDEFB;margin-bottom:50px;padding:10px;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Ticketing Info</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group {{$errors->has('presale') ? ' has-error' : ''}}">
-                        <label for="presale" class="control-label">Presale Ticket Price <em>(in cents)</em></label>
-                        <input id="presale" type="text" class="form-control" name="presale" value="{{old('presale')}}" >
+                    <div class="form-group {{$errors->has('presaleticketprice') ? ' has-error' : ''}}">
+                        <label for="presaleticketprice" class="control-label">Presale Ticket Price <em>(in cents)</em></label>
+                        <input id="presaleticketprice" type="text" class="form-control" name="presaleticketprice" value="{{old('presaleticketprice')}}" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="startdate" class="control-label">Presale Start Date & Time</label>
-                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                        <label for="presalestartdatetime" class="control-label">Presale Start Date & Time</label>
+                        <input id="presalestartdatetime" type="text" class="form-control" name="presalestartdatetime">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="startdate" class="control-label">Presale End Date & Time</label>
-                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                        <label for="presaleenddatetime" class="control-label">Presale End Date & Time</label>
+                        <input id="presaleenddatetime" type="text" class="form-control" name="presaleenddatetime">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -149,21 +148,21 @@
             <hr>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group {{$errors->has('normalticketprice') ? ' has-error' : ''}}">
-                        <label for="normalticketprice" class="control-label">Normal Ticket Pice <em>(in cents)</em></label>
-                        <input id="normalticketprice" type="text" class="form-control" name="normalticketprice" value="{{old('normalticketprice')}}" >
+                    <div class="form-group {{$errors->has('saleticketprice') ? ' has-error' : ''}}">
+                        <label for="saleticketprice" class="control-label">Sale Ticket Pice <em>(in cents)</em></label>
+                        <input id="saleticketprice" type="text" class="form-control" name="saleticketprice" value="{{old('saleticketprice')}}" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="startdate" class="control-label">Sale Start Date & Time</label>
-                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                        <label for="salestartdatetime" class="control-label">Sale Start Date & Time</label>
+                        <input id="salestartdatetime" type="text" class="form-control" name="salestartdatetime">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="startdate" class="control-label">Sale End Date & Time</label>
-                        <input id="startdatetime" type="text" class="form-control" name="startdatetime">
+                        <label for="saleenddatetime" class="control-label">Sale End Date & Time</label>
+                        <input id="saleenddatetime" type="text" class="form-control" name="saleenddatetime">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -198,6 +197,34 @@
             defaultDate: 'today',
             altInput: true,
             enableTime: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+        flatpickr("#presalestartdatetime", {
+            defaultDate: 'today',
+            altInput: true,
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+        flatpickr("#presaleenddatetime", {
+            defaultDate: 'today',
+            altInput: true,
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+        flatpickr("#salestartdatetime", {
+            defaultDate: 'today',
+            altInput: true,
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: 'Y-m-d H:i:s'
+        });
+        flatpickr("#saleenddatetime", {
+            defaultDate: 'today',
+            altInput: true,
+            enableTime: true,
+            enableSeconds: true,
             dateFormat: 'Y-m-d H:i:s'
         });
     </script>

@@ -15,6 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('venue_id')->unsigned();
+            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
             $table->string('image')->nullable();
@@ -23,16 +25,17 @@ class CreateEventsTable extends Migration
             $table->dateTime('startdatetime')->nullable();
             $table->dateTime('enddatetime')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('lat')->nullable();
-            $table->string('lng')->nullable();
-            $table->integer('venue_id')->unsigned();
-            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
-            $table->integer('presale')->unsigned()->nullable();
-            $table->integer('sale')->unsigned()->nullable();
-            $table->integer('price')->unsigned()->nullable();
+            $table->dateTime('presalestart')->nullable();
+            $table->dateTime('presaleend')->nullable();
+            $table->integer('presaleprice')->unsigned()->nullable();
+            $table->string('presalenote')->nullable();
+            $table->dateTime('salestart')->nullable();
+            $table->dateTime('saleend')->nullable();
+            $table->integer('saleprice')->unsigned()->nullable();
+            $table->string('salenote')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

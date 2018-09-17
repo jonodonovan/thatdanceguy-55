@@ -49,25 +49,11 @@
             <div class="col-md-6">
                 <div class="form-group {{$errors->has('facebook') ? ' has-error' : ''}}">
                     <label for="facebook" class="control-label">Facebook URL</label>
-                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{$venue->facebook or old('facebook')}}">
+                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{$venue->facebook or old('facebook', 'https://www.facebook.com/pages/...')}}">
                 </div>
             </div>
             <div class="col-md-6">
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group {{$errors->has('lat') ? ' has-error' : ''}}">
-                    <label for="lat" class="control-label">Latitude</label>
-                    <input id="lat" type="text" class="form-control" name="lat" value="{{$venue->lat or old('lat')}}">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group {{$errors->has('lng') ? ' has-error' : ''}}">
-                    <label for="lng" class="control-label">Longitude</label>
-                    <input id="lng" type="text" class="form-control" name="lng" value="{{$venue->lng or old('lng')}}">
-                </div>
             </div>
         </div>
         <div class="row">

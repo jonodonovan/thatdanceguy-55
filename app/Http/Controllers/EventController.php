@@ -7,6 +7,7 @@ use App\Tag;
 use App\Venue;
 use Illuminate\Http\Request;
 use Session;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -27,7 +28,8 @@ class EventController extends Controller
      */
     public function public()
     {
-        $events = Event::orderBy('startdatetime')->get();
+        $today = Carbon::today()->toDateTimeString();
+        $events = Event::where('startdatetime', '>', $today)->orderBy('startdatetime')->get();
         $tags = Tag::all()->unique('name');
 
         return view('public.event.index')->withEvents($events)->withTags($tags);
@@ -40,10 +42,11 @@ class EventController extends Controller
      */
     public function publicshow($slug)
     {
+        $now = Carbon::today()->toDateTimeString();
         $event = Event::where('slug', '=', $slug)->firstOrFail();
         $tags = Tag::all()->unique('name');
 
-        return view('public.event.show')->withEvent($event)->withTags($tags);
+        return view('public.event.show')->withEvent($event)->withTags($tags)->withNow($now);
     }
 
     /**
@@ -95,19 +98,17 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'name' => 'required|max:255|unique:events,name',
-            'intro' => '',
-            'description' => '',
-            'image' => 'image|mimes:jpeg,bmp,png',
-            'startdatetime' => '',
-            'enddatetime' => '',
-            'facebook' => '',
-            'lat' => '',
-            'lng' => '',
-            'address' => '',
-            'city' => '',
-            'zip' => '',
-            'venue_id' => 'required|integer',
+            'name'          => 'required|max:255|unique:events,name',
+            'intro'         => 'nullable',
+            'description'   => 'nullable',
+            'image'         => 'image|mimes:jpeg,bmp,png',
+            'startdatetime' => 'nullable',
+            'enddatetime'   => 'nullable',
+            'facebook'      => 'nullable',
+            'address'       => 'nullable',
+            'city'          => 'nullable',
+            'zip'           => 'nullable',
+            'venue_id'      => 'required|integer',
         ));
 
         $event = new Event;
@@ -125,40 +126,16 @@ class EventController extends Controller
         $event->image = $request->image;
         $event->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
+        $event->presalestart = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->presalestart)));
+        $event->presaleend = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->presaleend)));
+        $event->presaleprice = $request->presaleprice;
+        $event->presalenote = $request->presalenote;
+        $event->salestart = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->salestart)));
+        $event->saleend = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->saleend)));
+        $event->saleprice = $request->saleprice;
+        $event->salenote = $request->salenote;
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
-
-        $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
-
-        if ($request->lat == NULL) {
-            $event->lat = $venue->lat;
-        } else {
-            $event->lat = $request->lat;
-        }
-
-        if ($request->lng == NULL) {
-            $event->lng = $venue->lng;
-        } else {
-            $event->lng = $request->lng;
-        }
-
-        if ($request->address == NULL) {
-            $event->address = $venue->address;
-        } else {
-            $event->address = $request->address;
-        }
-
-        if ($request->city == NULL) {
-            $event->city = $venue->city;
-        } else {
-            $event->city = $request->city;
-        }
-
-        if ($request->zip == NULL) {
-            $event->zip = $venue->zip;
-        } else {
-            $event->zip = $request->zip;
-        }
 
         if ($request->image)
         {
@@ -221,16 +198,14 @@ class EventController extends Controller
         $event = Event::where('slug', '=', $slug)->firstOrFail();
 
         $this->validate($request, array(
-            'name' => 'required|max:255',
-            'intro' => '',
-            'description' => '',
-            'image' => 'image|mimes:jpeg,bmp,png',
-            'startdatetime' => '',
-            'enddatetime' => '',
-            'facebook' => '',
-            'lat' => '',
-            'lng' => '',
-            'venue_id' => 'integer',
+            'name'          => 'required|max:255',
+            'intro'         => 'nullable',
+            'description'   => 'nullable',
+            'image'         => 'image|mimes:jpeg,bmp,png',
+            'startdatetime' => 'nullable',
+            'enddatetime'   => 'nullable',
+            'facebook'      => 'nullable',
+            'venue_id'      => 'integer',
         ));
 
         $event->slug = $request->name;
@@ -245,40 +220,16 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->startdatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->startdatetime)));
         $event->enddatetime = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->enddatetime)));
+        $event->presalestart = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->presalestart)));
+        $event->presaleend = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->presaleend)));
+        $event->presaleprice = $request->presaleprice;
+        $event->presalenote = $request->presalenote;
+        $event->salestart = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->salestart)));
+        $event->saleend = date('Y-m-d H:i:s',strtotime('+00 seconds',strtotime($request->saleend)));
+        $event->saleprice = $request->saleprice;
+        $event->salenote = $request->salenote;
         $event->facebook = $request->facebook;
         $event->venue_id = $request->venue_id;
-
-        $venue = Venue::where('id', '=', $request->venue_id)->firstOrFail();
-
-        if ($request->lat == NULL) {
-            $event->lat = $venue->lat;
-        } else {
-            $event->lat = $request->lat;
-        }
-
-        if ($request->lng == NULL) {
-            $event->lng = $venue->lng;
-        } else {
-            $event->lng = $request->lng;
-        }
-
-        if ($request->address == NULL) {
-            $event->address = $venue->address;
-        } else {
-            $event->address = $request->address;
-        }
-
-        if ($request->city == NULL) {
-            $event->city = $venue->city;
-        } else {
-            $event->city = $request->city;
-        }
-
-        if ($request->zip == NULL) {
-            $event->zip = $venue->zip;
-        } else {
-            $event->zip = $request->zip;
-        }
 
         if ($request->image != NULL)
         {

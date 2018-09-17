@@ -13,6 +13,12 @@
                     </script>
                 @endsection
 
+            @endif 
+            
+            @if (session('status'))
+                <div class="alert alert-success pull-right" style="position: absolute;right:50px;top:50px;z-index:10000;">
+                    {{session('status')}}
+                </div>
             @endif
 
             @if (Session::has('errors'))

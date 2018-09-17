@@ -3,11 +3,13 @@
 Route::get('/', 'WelcomeController@home')->name('home');
 Route::view('hire-me', 'public.pages.contact');
 Route::post('hire-me/submit', 'ContactController@store')->name('contact.submit');
+Route::get('thank-you/{slug}', 'WelcomeController@thankyou')->name('thankyou');
 
 Route::get('posts', 'PostController@public')->name('posts');
 Route::get('posts/{slug}', 'PostController@publicshow')->name('posts.show');
 
 Route::get('events', 'EventController@public')->name('events');
+Route::post('/events/payment/submit', 'PaymentController@makePayment');
 Route::get('events/{slug}', 'EventController@publicshow')->name('events.show');
 
 Route::get('tags', 'TagController@public')->name('tags');
@@ -26,6 +28,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('event', 'EventController');
         Route::resource('venue', 'VenueController');
         Route::resource('partner', 'PartnerController');
+        Route::resource('ticket', 'TicketController');
         Route::get('contact', 'ContactController@index')->name('contact.index');
     });
 });

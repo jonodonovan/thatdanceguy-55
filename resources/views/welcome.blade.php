@@ -1,29 +1,6 @@
 @extends('layouts.app')
 
-@section('script_header')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQhcjGnZdvndWtKz6gBmk6nRTTzbBVJlE"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-@endsection
-
-@section('style')
-    <style type="text/css">
-    	#mymap {
-      		width: 100%;
-      		height: 500px;
-    	}
-  	</style>
-@endsection
-
 @section('content')
-    <div class="row">
-        <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
-            <div class="map-container">
-                <div id="mymap"></div>
-            </div>
-        </div>
-    </div>
-
     <div class="row" style="padding:15px;">
         <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
             <h3 style="color:white;text-transform:uppercase;">Upcoming Events</h3>
@@ -31,18 +8,26 @@
     </div>
     <div class="row">
         @foreach ($events as $event)
-            <div class="col-md-3" style="padding:0 5px;">
-                <div class="all-events">
-                    <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">
-                    <div class="thumbnail">
-                        <div class="caption" style="text-align:left;">
-                            <h3 style="font-size:26px;font-weight:bold;text-transform:uppercase;">{{$event->name}}</h3>
-                            <small style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</small>
-                            <small>from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</small>
-                            <p>{{$event->intro}}</p>
-                        </div>
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="thumbnail">
+                    <div class="caption" style="text-align:left;">
+                        <h3 style="font-weight:bold;">
+                            <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">{{$event->name}}
+                                @if($event->presaleend > $today)
+                                    <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
+                                @else
+                                    <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                @endif
+                            </a>
+                        </h3>
+                        <p style="padding:10px 0;"><span style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</span> from {{$event->startdatetime->format('ga')}} to {{$event->enddatetime->format('ga')}}</p>
+                        <p>{{$event->intro}}</p>
+                        @if ($event->address)
+                            <p style="padding-top:10px;">Location: <a href="/venues/{{$event->venue->slug}}">{{$event->venue->name}}</a> in <a href="https://www.google.com/maps/place/{{$event->address}} {{$event->city}}, FL {{$event->zip}}" target="_blank">{{$event->city}}</a></p>
+                        @else
+                            <p style="padding-top:10px;">Location: <a href="/venues/{{$event->venue->slug}}">{{$event->venue->name}}</a> in <a href="https://www.google.com/maps/place/{{$event->venue->address}} {{$event->venue->city}}, FL {{$event->venue->zip}}" target="_blank">{{$event->venue->city}}</a></p>
+                        @endif
                     </div>
-                    </a>
                 </div>
             </div>
         @endforeach
@@ -73,55 +58,4 @@
             @endforeach
         </div>
     @endif
-@endsection
-
-@section('script_footer')
-
-<script type="text/javascript">
-
-        var events = <?php print_r(json_encode($events)) ?>;
-
-        var mymap = new GMaps({
-          el: '#mymap',
-          lat: 27.935718,
-          lng: -82.504478,
-          zoom: 10,
-          disableDefaultUI: true,
-          styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
-        });
-
-        $.each( events, function( index, value ){
-            mymap.addMarker({
-                id: value.id,
-                lat: value.lat,
-                lng: value.lng,
-                title: value.name,
-                infoWindow: {
-                    content: '<h1 style="text-transform:uppercase;font-weight:bold;"><a href="/events/'+value.slug+'">'+value.name+'</a></h1><p style="font-style: italic;">'+value.intro+'</p>'
-                }
-            });
-        });
-
-  </script>
-
-
-<script>
-$("#maplinks a").click(function(event){
-        event.preventDefault();
-        var markerid = $(event.target).data("markerid");
-
-        $.each(markers,function (){
-            if (this.id == markerid){
-                var lat = this.position.lat();
-                var lon = this.position.lng();
-
-                var center = new google.maps.LatLng(lat, lon);
-                gmap.panTo(center);
-                gmap.setZoom(6);
-                google.maps.event.trigger(this, 'click', {});
-
-            }
-        });
-    });
-</script>
 @endsection

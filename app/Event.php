@@ -14,7 +14,7 @@ class Event extends Model
     *
     * @var array
     */
-    protected $dates = ['deleted_at', 'startdatetime', 'enddatetime'];
+    protected $dates = ['deleted_at', 'startdatetime', 'enddatetime', 'presalestart', 'presaleend', 'salestart', 'saleend'];
 
     public function venue()
     {
@@ -24,5 +24,10 @@ class Event extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
     }
 }
