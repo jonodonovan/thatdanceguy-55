@@ -99,16 +99,18 @@ class EventController extends Controller
     {
         $this->validate($request, array(
             'name'          => 'required|max:255|unique:events,name',
-            'intro'         => 'nullable',
+            'intro'         => 'nullable|max:255',
             'description'   => 'nullable',
             'image'         => 'image|mimes:jpeg,bmp,png',
             'startdatetime' => 'nullable',
             'enddatetime'   => 'nullable',
-            'facebook'      => 'nullable',
-            'address'       => 'nullable',
-            'city'          => 'nullable',
-            'zip'           => 'nullable',
+            'facebook'      => 'nullable|max:255',
+            'address'       => 'nullable|max:255',
+            'city'          => 'nullable|max:255',
+            'zip'           => 'nullable|max:255',
             'venue_id'      => 'required|integer',
+            'presalenote'   => 'nullable|max:255',
+            'salenote'      => 'nullable|max:255'
         ));
 
         $event = new Event;
@@ -199,13 +201,18 @@ class EventController extends Controller
 
         $this->validate($request, array(
             'name'          => 'required|max:255',
-            'intro'         => 'nullable',
+            'intro'         => 'nullable|max:255',
             'description'   => 'nullable',
             'image'         => 'image|mimes:jpeg,bmp,png',
             'startdatetime' => 'nullable',
             'enddatetime'   => 'nullable',
-            'facebook'      => 'nullable',
+            'facebook'      => 'nullable|max:255',
+            'address'       => 'nullable|max:255',
+            'city'          => 'nullable|max:255',
+            'zip'           => 'nullable|max:255',
             'venue_id'      => 'integer',
+            'presalenote'   => 'nullable|max:255',
+            'salenote'      => 'nullable|max:255'
         ));
 
         $event->slug = $request->name;

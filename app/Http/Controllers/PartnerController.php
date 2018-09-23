@@ -73,12 +73,12 @@ class PartnerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'name' => 'required|max:255',
-            'website' => '',
-            'intro' => '',
-            'phone' => '',
-            'email' => '',
-            'specialty' => '',
+            'name'      => 'required|max:255',
+            'website'   => 'nullable|max:255',
+            'intro'     => 'nullable|max:255',
+            'phone'     => 'nullable|max:255',
+            'email'     => 'nullable|max:255',
+            'specialty' => 'nullable|max:255',
         ));
 
         $partner = new Partner;
@@ -142,12 +142,12 @@ class PartnerController extends Controller
         $partner = Partner::where('slug', '=', $slug)->firstOrFail();
 
         $this->validate($request, array(
-            'name' => 'required|max:255',
-            'website' => '',
-            'intro' => '',
-            'phone' => '',
-            'email' => '',
-            'specialty' => '',
+            'name'      => 'required|max:255',
+            'website'   => 'nullable|max:255',
+            'intro'     => 'nullable|max:255',
+            'phone'     => 'nullable|max:255',
+            'email'     => 'nullable|max:255',
+            'specialty' => 'nullable|max:255',
         ));
 
         $partner->slug = $request->name;

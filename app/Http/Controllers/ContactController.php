@@ -38,11 +38,11 @@ class ContactController extends Controller
        public function store()
        {
            $contact = request()->validate([
-               'name' => 'required|max:255',
-               'companyname' => 'max:255',
-               'email' => 'max:255',
-               'phonenumber' => 'max:15',
-               'message' => 'required'
+               'name'           => 'required|max:255',
+               'companyname'    => 'nullable|max:255',
+               'email'          => 'required|max:255',
+               'phonenumber'    => 'required|max:15',
+               'message'        => 'required'
            ]);
 
            Contact::Create($contact);

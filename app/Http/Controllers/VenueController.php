@@ -76,12 +76,12 @@ class VenueController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'name' => 'required|max:255|unique:venues,name',
-            'phone' => '',
-            'address' => '',
-            'city' => 'required',
-            'zip' => '',
-            'facebook' => '',
+            'name'          => 'required|max:255|unique:venues,name',
+            'phone'         => 'nullable|max:255',
+            'address'       => 'nullable|max:255',
+            'city'          => 'required|max:255',
+            'zip'           => 'nullable|max:255',
+            'facebook'      => 'nullable|max:255',
         ));
 
         $venue = new Venue;
@@ -146,12 +146,12 @@ class VenueController extends Controller
         $venue = Venue::where('slug', '=', $slug)->firstOrFail();
 
         $this->validate($request, array(
-            'name' => 'required|max:255',
-            'phone' => '',
-            'address' => '',
-            'city' => 'required',
-            'zip' => '',
-            'facebook' => '',
+            'name'          => 'required|max:255',
+            'phone'         => 'nullable|max:255',
+            'address'       => 'nullable|max:255',
+            'city'          => 'required|max:255',
+            'zip'           => 'nullable|max:255',
+            'facebook'      => 'nullable|max:255',
         ));
 
         $venue->slug = $request->name;

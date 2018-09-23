@@ -87,11 +87,10 @@ class PostController extends Controller
     {
         // validate data
         $this->validate($request, array(
-            'title' => 'required|max:255|unique:posts,title',
-            'intro' => '',
-            'body' => '',
-            'image' => 'image|mimes:jpeg,bmp,png',
-
+            'title'     => 'required|max:255|unique:posts,title',
+            'intro'     => 'nullable|max:255',
+            'body'      => 'nullable',
+            'image'     => 'image|mimes:jpeg,bmp,png'
         ));
 
         // store data
@@ -181,10 +180,10 @@ class PostController extends Controller
         $post = Post::where('slug', '=', $slug)->firstOrFail();
 
         $this->validate($request, array(
-            'title' => 'required|max:255',
-            'intro' => '',
-            'body' => '',
-            'image' => 'image|mimes:jpeg,bmp,png',
+            'title'     => 'required|max:255',
+            'intro'     => 'nullable|max:255',
+            'body'      => 'nullable',
+            'image'     => 'image|mimes:jpeg,bmp,png'
         ));
 
         $post->slug = $request->title;
