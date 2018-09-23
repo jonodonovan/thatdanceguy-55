@@ -3,7 +3,11 @@
 @section('content')
     <div class="row" style="padding:15px;">
         <div class="col-md-12" style="padding-right:0px;padding-left:0px;">
-            <h3 style="color:white;text-transform:uppercase;">Upcoming Events</h3>
+            @if ($events->count() >= 2)
+                <h3 style="color:white;text-transform:uppercase;">Upcoming Events</h3>
+            @else 
+                <h3 style="color:white;text-transform:uppercase;">Upcoming Event</h3>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -13,10 +17,12 @@
                     <div class="caption" style="text-align:left;">
                         <h3 style="font-weight:bold;">
                             <a href="{{url('events/'.$event->slug)}}" style="text-decoration:none;">{{$event->name}}
-                                @if($event->presaleend > $today)
-                                    <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
-                                @else
-                                    <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                @if($event->presaleprice || $event->saleprice)
+                                    @if($event->presaleend > $today)
+                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
+                                    @else
+                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                    @endif
                                 @endif
                             </a>
                         </h3>

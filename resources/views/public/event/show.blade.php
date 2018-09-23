@@ -29,7 +29,7 @@
                 <h2>Purchase:</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom:100px;">
             <div class="col-md-12">
 
                 @if($event->saleend < $now)

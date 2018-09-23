@@ -11,13 +11,21 @@
                     </a>
                 @endif
             </h1>
-            <p><a href="https://www.google.com/maps/place/{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}}" target="_blank">{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}} <i class="fa fa-map-marker" aria-hidden="true"></i></a> | {{$venue->phone}}</p>
+            <p><a href="https://www.google.com/maps/place/{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}}" target="_blank">{{$venue->address}} {{$venue->city}}, FL {{$venue->zip}} <i class="fa fa-map-marker" aria-hidden="true"></i></a> 
+                @if($venue->phone)
+                | {{$venue->phone}}
+                @endif
+            </p>
         </div>
     </div>
     @if (! $upcomingevents->isEmpty())
         <div class="row">
             <div class="col-md-12">
-                <h3>Upcoming Events:</h3>
+                @if ($upcomingevents->count() >= 2)
+                    <h3>Upcoming Events:</h3>
+                @else 
+                    <h3>Upcoming Event:</h3>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -28,10 +36,12 @@
                         <div class="thumbnail" style="border: 2px solid #000000;">
                             <div class="caption" style="">
                                 <h3 style="font-weight:bold;">{{$event->name}}
-                                    @if($event->presaleend > $today)
-                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
-                                    @else
-                                        <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                    @if($event->presaleprice || $event->saleprice)
+                                        @if($event->presaleend > $today)
+                                            <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->presaleprice/100}}</b></i>
+                                        @else
+                                            <i class="fa fa-ticket" aria-hidden="true">$<b>{{$event->saleprice/100}}</b></i>
+                                        @endif
                                     @endif
                                 </h3>
                                 <p style="padding:10px 0;"><span style="font-weight:bold;">{{$event->startdatetime->format('F dS')}}</span> 

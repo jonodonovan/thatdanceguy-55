@@ -83,7 +83,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('venue_id') ? ' has-error' : ''}}">
                         <label for="venue_id">Venue</label>
                         <select class="form-control" id="venue_id" name="venue_id">
                             <option value="">Select</option>
@@ -174,7 +174,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-right">
+            <div class="col-md-12 text-center">
                 <a class="btn btn-default" href="{{route('admin.event.index')}}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Create Event</button>
             </div>
